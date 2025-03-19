@@ -1,15 +1,17 @@
 {
-  "name": "news",
+  "name": "mailsystem",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "antd": "^5.24.4",
     "cra-template": "1.2.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-highlight-words": "^0.21.0",
+    "react-icons": "^5.5.0",
     "react-router-dom": "^7.1.5",
     "react-scripts": "5.0.1",
-    "sass": "^1.85.0",
-    "swiper": "^11.2.4"
+    "sass": "^1.85.0"
   },
   "scripts": {
     "start": "react-scripts start",
