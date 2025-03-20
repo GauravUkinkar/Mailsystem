@@ -151,27 +151,19 @@ const Home = () => {
 
   const columns = [
     {
-      title: "Sr. No",
-      dataIndex: "sr.no",
-      key: "sr.no",
-      width: 60,
-      responsive: ["sm"],
-      render: (text, record, index) => index + 1,
-    },
-    {
       title: "Domain Name",
       dataIndex: "name",
       key: "name",
-      width: "20%",
+      width: "10%",
       ...getColumnSearchProps("name"),
     },
-    { title: "Email From", dataIndex: "from", key: "from", width: "20%" },
-    { title: "Email To", dataIndex: "to", key: "to", width: "20%" },
+
+    { title: "Email To", dataIndex: "to", key: "to", width: "8%" },
     {
       title: "Status",
       dataIndex: "status",
       key: "status",
-      width: "15%",
+      width: "5%",
       render: (status) => {
         let color = "";
         switch (status.toLowerCase()) {
@@ -203,22 +195,15 @@ const Home = () => {
         );
       },
     },
-    { title: "Date", dataIndex: "date", key: "date", width: "10%" },
-    { title: "Time", dataIndex: "time", key: "time", width: "10%" },
-    {
-      title: "Action",
-      key: "action",
-      width: "5%",
-      render: () => <RiDeleteBin5Line />,
-    },
+    { title: "Date & Time", dataIndex: "date", key: "date", width: "10%" },
   ];
 
   return (
     <div className="home-parent parent">
       <div className="home-cont cont">
-        <h2>Email Testing System </h2>
+        {/* <h2>Email Testing System </h2> */}
+        <Table columns={columns} dataSource={data} scroll={{ x: 800 }} />
       </div>
-      <Table columns={columns} dataSource={data} scroll={{ x: 800 }} />
     </div>
   );
 };
