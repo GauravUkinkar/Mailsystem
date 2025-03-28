@@ -6,6 +6,7 @@ const Header = () => {
   <div className="header-parent parent">
 <div className="btn">Add Email</div>
 <div className="btn">Add Domain</div>
+<div className="btn">Add Website</div>
   </div>
   </>
   )

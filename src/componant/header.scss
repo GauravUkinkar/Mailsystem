@@ -3,8 +3,11 @@
     padding:15px;
     align-items: flex-end;
     justify-content: end;
-    gap:30px;
+    gap:20px;
     height:60px;
     background:var(--white);
+    position: fixed;
+    top: 0;
+    left: 0;
 
 }
