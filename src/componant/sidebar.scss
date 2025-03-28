@@ -1,0 +1,13 @@
+.sidebar-parent {
+  display: flex;
+  position: absolute;
+  left: 0;
+  top: 60px;
+  width: 250px;
+  background: rgb(78, 79, 80);
+  height:calc(100% - 0px);
+// height:100%;
+p{
+    color:var(--white);
+}
+}

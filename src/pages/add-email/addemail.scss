@@ -1,0 +1,46 @@
+.add-email-parent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+
+  .add-email-cont {
+    padding: 20px;
+    background:var(--white);
+    align-items: center;
+    display: flex;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    // width: 100%;
+    height:auto;
+border-radius: 10px;
+    justify-content: center;
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 400px;
+      label {
+        p {
+          font-weight: 600;
+          margin-bottom: 0.5rem;
+        }
+
+        input,
+        select {
+          width: 100%;
+          padding: 10px;
+          border: 2px solid #ddd;
+          border-radius: 8px;
+          outline: none;
+          transition: border 0.3s ease;
+
+          &:focus {
+            border-color: #0078ff;
+          }
+        }
+      }
+    }
+  }
+}
