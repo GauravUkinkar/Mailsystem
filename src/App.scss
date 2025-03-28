@@ -3,18 +3,9 @@
   --white: #ffffff;
   --white2: rgb(245, 245, 240);
   --accent: #ff0000;
-  --section_divide:#D9D9D9;
-  // figma color codes
   --max-width: 1200px;
-  // other colors
-  --success: #4cda00;
-  --success-l: #e1ffd1;
   --info: #2a83f2;
-  --info-l: #dfedff;
-  --error: #ff4d00;
-  --error-l: #ffebed;
-  // other variable
-  --unit: 20px;
+  --unit: 16px;
   --btn-h: 40px;
   --trans-s: all 1s ease-in-out;
   --trans-q: all 0.3s ease-in-out;
@@ -32,16 +23,13 @@
   margin: 0px;
   padding: 0px;
   font-family: "nexa-book", sans-serif;
-  font-size: calc(var(--unit) + (var(--unit) / 3));
-  // color: var(--black);
 }
 
 body {
   overflow-x: hidden !important;
   min-height: 100svh;
-  // width: 100svw;
   width: 100%;
-  // background: var(--white2);
+  background: #dae3ff44;
   p {
     font-size: 16px;
     font-family: "Funnel Display", sans-serif;
@@ -101,19 +89,19 @@ a {
   font-weight: 400;
 }
 
-// .btn {
-//   width: auto;
-//   padding: calc(var(--unit) / 2) var(--unit);
-//   border-radius: 25px;
-//   border: 1px solid var(--accent);
-//   background-color: transparent;
-//   color: var(--accent);
-//   font-size: var(--unit);
-//   font-weight: 500;
-//   transition: var(--trans-m);
-//   cursor: pointer;
-//   &:hover {
-//     background-color: var(--accent);
-//     color: var(--white);
-//   }
-// }
+.btn {
+  width: auto;
+  padding: calc(var(--unit) / 2) var(--unit);
+  border-radius: 25px;
+  border: 1px solid var(--accent);
+  background-color: transparent;
+  color: var(--accent);
+  font-size: var(--unit);
+  font-weight: 500;
+  transition: var(--trans-m);
+  cursor: pointer;
+  &:hover {
+    background-color: var(--accent);
+    color: var(--white);
+  }
+}

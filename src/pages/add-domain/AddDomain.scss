@@ -1,0 +1,52 @@
+.add-domain-parent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+
+  .add-domain-cont {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 500px;
+
+    .add-domain-box {
+      width: 100%;
+      height: auto;
+      box-shadow: var(--shadow);
+      border-radius: var(--unit);
+      display: flex;
+      padding: 16px;
+      flex-direction: column;
+      background: white;
+      gap: calc(var(--unit));
+    }
+
+    input {
+      width: 100%;
+      border-radius: calc(var(--unit) / 2);
+      border: 1px solid rgba(0, 0, 0, 0.158);
+      outline: none;
+      padding: 10px;
+    }
+
+    label {
+      display: flex;
+      flex-direction: column;
+      gap: calc(var(--unit) / 4);
+    }
+
+    .error{
+        color: orangered;
+        font-size: calc(var(--unit));
+    }
+
+    select {
+      width: 100%;
+      border-radius: calc(var(--unit) / 2);
+      border: 1px solid rgba(0, 0, 0, 0.158);
+      outline: none;
+      padding: 10px;
+    }
+  }
+}
