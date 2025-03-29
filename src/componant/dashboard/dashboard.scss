@@ -48,6 +48,16 @@
       border-radius: 10px;
       flex-direction: column;
       gap:20px;
+      .login-detail{
+        display: flex;
+        gap:20px;
+        p{
+          // color:black;
+          span{
+            color:rgba(0, 0, 0, 0.623);
+          }
+        }
+      }
     }
   }
 }

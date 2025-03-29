@@ -90,10 +90,12 @@ const Dashboard = () => {
           {/* //-------------------Third Section For Login Details------------// */}
           <div className="third-section">
           <h3>Domain Login Details:</h3>
-          
+          <div className="login-detail">
           <p>Login URL: <span>https://hotinger.com</span></p>
           <p>Username: <span>this is username</span></p>
           <p>Password: <span>this is password</span></p>
+          </div>
+        
           </div>
         </div>
       </div>
