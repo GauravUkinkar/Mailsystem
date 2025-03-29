@@ -39,5 +39,15 @@
             gap:10px;
         }
     }
+
+    //css for third section - login details
+    .third-section{
+      display: flex;
+      background:white;
+      padding:20px;
+      border-radius: 10px;
+      flex-direction: column;
+      gap:20px;
+    }
   }
 }
