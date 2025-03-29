@@ -92,12 +92,12 @@ a {
 .btn {
   width: auto;
   padding: calc(var(--unit) / 2) var(--unit);
-  border-radius: 25px;
-  border: 1px solid var(--accent);
+  border-radius: calc(var(--unit) / 2);
+  border: 1.5px solid var(--accent);
   background-color: transparent;
   color: var(--accent);
   font-size: var(--unit);
-  font-weight: 500;
+  font-weight: 400;
   transition: var(--trans-m);
   cursor: pointer;
   &:hover {
