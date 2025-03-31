@@ -1,15 +1,16 @@
-import React from 'react'
-import "./header.scss"
+import React from "react";
+import "./header.scss";
+import { Link } from "react-router-dom";
 const Header = () => {
   return (
-  <>
-  <div className="header-parent parent">
-<div className="btn">Add Email</div>
-<div className="btn">Add Domain</div>
-<div className="btn">Add Website</div>
-  </div>
-  </>
-  )
-}
+    <>
+      <div className="header-parent parent">
+        <Link to="/add-email" className="btn">Add Email</Link>
+        <Link to="/add-domain" className="btn">Add Domain</Link>
+        <Link to="/" className="btn">Add Website</Link>
+      </div>
+    </>
+  );
+};
 
-export default Header
+export default Header;
