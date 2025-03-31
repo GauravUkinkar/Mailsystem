@@ -1,14 +1,15 @@
 import React from "react";
 import "./home.scss";
+import Dashboard from "../componant/dashboard/Dashboard";
 
 
 const Home = () => {
 
 
   return (
-    <div>
-     
-    </div>
+    <>
+     <Dashboard />
+    </>
   );
 };
 

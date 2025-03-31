@@ -18,9 +18,6 @@ const Sidebar = () => {
         <li>theteamdental.in</li>
     </ul>
    </div>
-
-
-   <Dashboard />
    </>
   )
 }
