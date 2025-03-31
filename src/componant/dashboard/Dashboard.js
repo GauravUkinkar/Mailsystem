@@ -67,7 +67,7 @@ const Dashboard = () => {
       title: 'Sr No',
       dataIndex: 'srNo',
       key: 'srNo',
-      width: '5%',
+      width: '10%',
     },
     {
       title: 'Website URL',
@@ -79,13 +79,13 @@ const Dashboard = () => {
       title: 'Username',
       dataIndex: 'username',
       key: 'username',
-      width: '35%',
+      width: '30%',
     },
     {
       title: 'Password',
       dataIndex: 'password',
       key: 'password',
-      width: '35%',
+      width: '30%',
     },
     {
       title: 'Action',

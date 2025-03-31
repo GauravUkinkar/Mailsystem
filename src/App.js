@@ -18,6 +18,7 @@ function App() {
     <Route path='/' element={<Home/> } />
     <Route path='/add-domain' element={<AddDomain/> } />
     <Route path='/add-email' element={<Addmail /> } />
+    
   </Routes>
   </BrowserRouter>
   
