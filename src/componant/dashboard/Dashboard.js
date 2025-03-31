@@ -7,10 +7,6 @@ import axios from "axios";
 
 const Dashboard = () => {
 
-
-const [getDomains, setGetDomains] = useState([]);
-
-
   //subdomain data
   const columns = [
     {
@@ -218,26 +214,6 @@ const [getDomains, setGetDomains] = useState([]);
   ];
   //end email data
 
-  // get all domains
-  const getAllDomains = async () => {
-    try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_API}api/domain/getAllDomain`
-      );
-
-      setGetDomains(response.data.data);
-      
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  console.log(getDomains,"??????");
-
-
-  useEffect(() => {
-    getAllDomains();
-  }, [])
 
   return (
     <>
@@ -254,7 +230,7 @@ const [getDomains, setGetDomains] = useState([]);
             <div className="domain-details">
               <div className="detail-left">
                 <p>
-                  Domain Name : <span>{getDomains?.[0]?.Domain}</span>{" "}
+                  Domain Name : <span>abc</span>{" "}
                 </p>
                 <p>
                   Purchase Platform : <span>15/3/24</span>{" "}
