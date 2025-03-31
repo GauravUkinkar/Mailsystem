@@ -126,6 +126,71 @@ const Dashboard = () => {
   ];
   //end website data
 
+  //Email data
+  const columnsemail = [
+    {
+      title: 'Sr No',
+      dataIndex: 'srNo',
+      key: 'srNo',
+      width: '10%',
+    },
+    {
+      title: 'Webmail ID',
+      dataIndex: 'mail',
+      key: 'mail',
+      width: '20%',
+    },
+    {
+      title: 'Mail Username',
+      dataIndex: 'mailusername',
+      key: 'mailusername',
+      width: '30%',
+    },
+    {
+      title: 'Mail Password',
+      dataIndex: 'mailpassword',
+      key: 'mailpassword',
+      width: '30%',
+    },
+    {
+      title: 'Action',
+      key: 'action',
+      render: (_, record) => (
+        <Space size="middle">
+          <a href="#"><CiEdit /></a>
+          <a href="#"><MdDeleteForever /></a>
+        </Space>
+      ),
+      width: '5%',
+    },
+  ];
+
+  const emaildata = [
+    {
+      key: '1',
+      srNo: '1',
+      mail: 'info@diwise.in',
+      mailusername:'new_user_diwise',
+      mailpassword:'new_user_diwise@2025',
+    },
+    {
+      key: '2',
+      srNo: '2',
+      mail: 'info@diwise.in',
+      mailusername:'new_user_diwise',
+      mailpassword:'new_user_diwise@2025',
+      
+    },
+    {
+      key: '3',
+      srNo: '3',
+      mail: 'info@diwise.in',
+      mailusername:'new_user_diwise',
+      mailpassword:'new_user_diwise@2025',
+    },
+  ];
+  //end email data
+
   return (
     <>
       <div className="dashboard-parent parent">
@@ -169,11 +234,25 @@ const Dashboard = () => {
           {/* //-------------------Website login details ----------------// */}
 
           <div className="fourth-section">
-            <h3>Website Login Details</h3>
+            <h3>Website Login Details:</h3>
             <div className="website-list">
               <Table 
-                columns={columnsweb} 
-                dataSource={webdata} 
+               columns={columnsweb} 
+               dataSource={webdata} 
+                
+                pagination={{ pageSize: 5 }} 
+                bordered 
+              />
+            </div>
+          </div>
+
+          {/* //--------------Email List for domain -------------------// */}
+          <div className="fifth-section">
+            <h3>Email Login Details:</h3>
+            <div className="email-list">
+            <Table 
+               columns={columnsemail} 
+               dataSource={emaildata} 
                 pagination={{ pageSize: 5 }} 
                 bordered 
               />

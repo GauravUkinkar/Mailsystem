@@ -68,4 +68,21 @@
       }
     }
   }
+
+  .fifth-section{
+    display: flex;
+    background: white;
+    padding:20px;
+    border-radius: 10px;
+    flex-direction: column;
+    gap:20px;
+    .email-list{
+      display: flex;align-items: center;
+            flex-wrap: wrap;
+            gap:10px;
+            .ant-table-wrapper{
+              width: 100%;
+            }
+    }
+  }
 }
