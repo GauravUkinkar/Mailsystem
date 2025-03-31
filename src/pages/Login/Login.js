@@ -15,7 +15,7 @@ const Login = () => {
         formData
       );
 
-      console.log(response, ">>");
+      console.log(response, ">>>>>>>>>>>>>>>>>>>>>>>>");
     } catch (error) {
       console.log(error);
     }
@@ -42,7 +42,13 @@ const Login = () => {
             </label>
             <label>
               <p>Password</p>
-              <input type="password" />
+              <input
+                type="password"
+                value={formData.password}
+                onChange={(e) =>
+                  setFormData({ ...formData, password: e.target.value })
+                }
+              />
             </label>
             <button class="btn" type="submit">
               Login
