@@ -19,6 +19,14 @@ const Addmail = () => {
                 <option value="outlook.com">@outlook.com</option>
               </select>
             </label>
+            <label>
+              <p>Username</p>
+              <input type="text" name="username" />
+            </label>
+            <label>
+              <p>Password</p>
+              <input type="password" name="password" />
+            </label>
             <button className="btn">submit</button>
           </form>
         </div>
