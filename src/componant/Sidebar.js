@@ -1,25 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./sidebar.scss";
 import { MdOutlineLogout } from "react-icons/md";
 import { Link } from "react-router-dom";
-const Sidebar = ({onLogout}) => {
+import axios from "axios";
+const Sidebar = ({ onLogout }) => {
+  const [getDomains, setGetDomains] = useState([]);
 
-  
+  // get all domains
+  const getAllDomains = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API}api/domain/getAllDomain`
+      );
+
+      setGetDomains(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getAllDomains();
+  }, []);
 
   return (
     <>
       <div className="sidebar-parent">
         <ul className="list">
-          <li>diwise.uk</li>
-          <li>diwise.in</li>
-          <li>pandozasolutions.com</li>
-          <li>akkafoundation.in</li>
-          <li>theindianjourney.com</li>
-          <li>arvindpatilnilangekar.com</li>
-          <li>sambhajipatilnilangekar.com</li>
-          <li>diwiseglobal.com</li>
-          <li>saidigitek.com</li>
-          <li>theteamdental.in</li>
+          {getDomains.map((item, index) => (
+            <li>{item.Domain}</li>
+          ))} 
         </ul>
 
         <div className="logout-btn">

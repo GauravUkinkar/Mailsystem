@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./login.scss";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-const Login = ({onLogin}) => {
+const Login = ({ onLogin }) => {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -21,12 +21,8 @@ const Login = ({onLogin}) => {
       if (response.status === 201) {
         localStorage.setItem("isVerified", true);
         navigate("/");
-        onLogin()
+        onLogin();
       }
-
-
-   
-
     } catch (error) {
       console.log(error);
     }
