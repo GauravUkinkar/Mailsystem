@@ -7,7 +7,7 @@ const Header = () => {
       <div className="header-parent parent">
         <Link to="/add-email" className="btn">Add Email</Link>
         <Link to="/add-domain" className="btn">Add Domain</Link>
-        <Link to="/" className="btn">Add Website</Link>
+        <Link to="/add-website" className="btn">Add Website</Link>
       </div>
     </>
   );
