@@ -60,9 +60,31 @@
       }
     }
 
-    //css for subdomain list
-    .middle-section,
-    .fourth-section {
+    //css for subdomain list 
+    .middle-section, .fourth-section{
+        display: flex;
+        background: white;
+        padding:20px;
+        border-radius: 10px;
+        flex-direction: column;
+        gap:20px;
+        .subdomain-list, .website-list{
+            display: flex;align-items: center;
+            flex-wrap: wrap;
+            gap:10px;
+        }
+    }
+
+    .fourth-section{
+      .website-list{
+        .ant-table-wrapper{
+          width: 100%;
+        }
+      }
+    }
+
+    //css for third section - login details
+    .third-section{
       display: flex;
       background: white;
       padding: 20px;
@@ -76,6 +98,23 @@
         flex-wrap: wrap;
         gap: 10px;
       }
+    }
+  }
+
+  .fifth-section{
+    display: flex;
+    background: white;
+    padding:20px;
+    border-radius: 10px;
+    flex-direction: column;
+    gap:20px;
+    .email-list{
+      display: flex;align-items: center;
+            flex-wrap: wrap;
+            gap:10px;
+            .ant-table-wrapper{
+              width: 100%;
+            }
     }
   }
 }
