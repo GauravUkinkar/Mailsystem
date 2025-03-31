@@ -29,6 +29,9 @@ function AddDomain() {
     purchasePlatform: "",
     purchaseDate: "",
     expiryDate: "",
+    platformUrl: "",
+    username: "",
+    password: "",
   });
 
   const handleAddDomain = async (e) => {
@@ -43,7 +46,7 @@ function AddDomain() {
 
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API}/api/domain/addDomian`,
+        `${process.env.REACT_APP_API}api/domain/addDomian`,
         domainAdd
       );
 
@@ -52,6 +55,9 @@ function AddDomain() {
         purchasePlatform: "",
         purchaseDate: "",
         expiryDate: "",
+        platformUrl: "",
+        username: "",
+        password: "",
       });
     } catch (error) {
       console.log(error);
@@ -79,8 +85,57 @@ function AddDomain() {
                 }
               />
             </label>
-
             {error.Domain && <span className="error">{error.Domain}</span>}
+
+            <label for="">
+              <p>Platform Url</p>
+              <input
+                type="text"
+                name="domain"
+                value={domainAdd.platformUrl}
+                onChange={(e) =>
+                  setDomainAdd({
+                    ...domainAdd,
+                    platformUrl: e.target.value,
+                  })
+                }
+              />
+            </label>
+            {error.platformUrl && (
+              <span className="error">{error.platformUrl}</span>
+            )}
+
+            <label for="">
+              <p>User Name</p>
+              <input
+                type="text"
+                name="domain"
+                value={domainAdd.username}
+                onChange={(e) =>
+                  setDomainAdd({
+                    ...domainAdd,
+                    username: e.target.value,
+                  })
+                }
+              />
+            </label>
+            {error.username && <span className="error">{error.username}</span>}
+
+            <label for="">
+              <p>Password</p>
+              <input
+                type="text"
+                name="domain"
+                value={domainAdd.password}
+                onChange={(e) =>
+                  setDomainAdd({
+                    ...domainAdd,
+                    password: e.target.value,
+                  })
+                }
+              />
+            </label>
+            {error.password && <span className="error">{error.password}</span>}
 
             <label for="">
               <p>Purchase Platform</p>
