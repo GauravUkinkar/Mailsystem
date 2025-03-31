@@ -7,20 +7,25 @@
   background: rgb(10, 10, 10);
   height: calc(100vh - 60px);
   align-items: center;
-  
- 
+
   .list {
     padding: 10px;
-    gap:15px;display: flex;flex-direction:column;
+    gap: 15px;
+    display: flex;
+    flex-direction: column;
     li {
-   color:rgba(255, 255, 255, 0.616);
-      
+      color: rgba(255, 255, 255, 0.616);
       display: flex;
-      border:1px solid rgba(214, 213, 213, 0.329);
+      border: 1px solid rgba(214, 213, 213, 0.329);
       border-radius: 10px;
       align-items: center;
-      padding:10px;
-      cursor:pointer;
+      padding: 10px;
+      cursor: pointer;
+      transition: var(--trans-m);
+
+      &:hover{
+        background: rgba(214, 213, 213, 0.329);
+      }
     }
   }
 }

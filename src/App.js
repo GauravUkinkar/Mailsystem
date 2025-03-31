@@ -15,7 +15,7 @@ function App() {
   <Header />
   
   <Routes>
-    <Route path='/home' element={<Home/> } />
+    <Route path='/' element={<Home/> } />
     <Route path='/add-domain' element={<AddDomain/> } />
     <Route path='/add-email' element={<Addmail /> } />
   </Routes>
