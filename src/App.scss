@@ -1,8 +1,8 @@
 :root {
-  --black: #000;
+  --black: rgb(10, 10, 10);
   --white: #ffffff;
   --white2: rgb(245, 245, 240);
-  --accent: #673DE6;
+  --accent: #673de6;
   --max-width: 1200px;
   --info: #2a83f2;
   --unit: 16px;
@@ -14,7 +14,7 @@
 }
 
 // custom fonts
-@import url('https://fonts.googleapis.com/css2?family=Aguafina+Script&family=Funnel+Display:wght@300..800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Aguafina+Script&family=Funnel+Display:wght@300..800&display=swap");
 *,
 *::after,
 *::before {
@@ -29,7 +29,7 @@ body {
   overflow-x: hidden !important;
   min-height: 100svh;
   width: 100%;
-  background: #F4F5FF;
+  background: rgba(128, 128, 128, 0.158);
   p {
     font-size: 16px;
     font-family: "Funnel Display", sans-serif;
@@ -37,10 +37,8 @@ body {
   }
 }
 
-
 @font-face {
-	font-family: 'Brush Script MT';
-
+  font-family: "Brush Script MT";
 }
 html {
   scroll-behavior: smooth;
@@ -85,7 +83,7 @@ a {
 }
 
 .heading {
-	font-family: 'Brush Script MT';
+  font-family: "Brush Script MT";
   font-weight: 400;
 }
 
@@ -93,15 +91,16 @@ a {
   width: auto;
   padding: calc(var(--unit) / 2) var(--unit);
   border-radius: calc(var(--unit) / 2);
-  border: 1.5px solid var(--accent);
-  background-color: transparent;
-  color: var(--accent);
+  border: 1px solid rgba(214, 213, 213, 0.329);
+  background-color: var(--black);
+  color: rgba(255, 255, 255, 0.678);
   font-size: var(--unit);
   font-weight: 400;
   transition: var(--trans-m);
   cursor: pointer;
   &:hover {
-    background-color: var(--accent);
-    color: var(--white);
+    color: var(--black);
+    border: 1px solid black;
+    background: white;
   }
 }
