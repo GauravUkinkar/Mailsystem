@@ -1,6 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import './addwebsite.scss'
 const AddWebsite = () => {
+
+
+
+const [webSite, setWebSite] = useState({
+  frontendUrl:"",
+  backendUrl:"",
+  credentials:[]
+})
+
+
   return (
     <>
       <div className="add-website-parent parent">

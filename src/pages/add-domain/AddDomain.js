@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./AddDomain.scss";
 import axios from "axios";
 
+
 function AddDomain() {
   const [error, setError] = useState({});
 
@@ -10,6 +11,15 @@ function AddDomain() {
 
     if (!values.Domain) {
       error.Domain = "please enter domain name";
+    }
+    if (!values.platformUrl) {
+      error.platformUrl = "please select purchase platform";
+    }
+    if (!values.username) {
+      error.username = "please select purchase platform";
+    }
+    if (!values.password) {
+      error.password = "please select purchase platform";
     }
     if (!values.purchasePlatform) {
       error.purchasePlatform = "please select purchase platform";
@@ -49,6 +59,9 @@ function AddDomain() {
         `${process.env.REACT_APP_API}api/domain/addDomian`,
         domainAdd
       );
+
+      alert("Domain Added Succefully");
+      
 
       setDomainAdd({
         Domain: "",

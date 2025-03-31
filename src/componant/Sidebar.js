@@ -29,7 +29,7 @@ const Sidebar = ({ onLogout }) => {
         <ul className="list">
           {getDomains.map((item, index) => (
             <li>{item.Domain}</li>
-          ))} 
+          ))}
         </ul>
 
         <div className="logout-btn">
