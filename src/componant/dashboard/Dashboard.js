@@ -5,6 +5,8 @@ import { CiEdit } from "react-icons/ci";
 import { MdDeleteForever } from "react-icons/md";
 
 const Dashboard = () => {
+
+  //subdomain data
   const columns = [
     {
       title: 'Sr No',
@@ -57,6 +59,72 @@ const Dashboard = () => {
       description: 'I ve added a Sr No column and adjusted the column widths to distribute 100% evenly. Let me know if yod like further adjustments or styling enhancements!',
     },
   ];
+  //end subdomain data
+
+   //website data
+   const columnsweb = [
+    {
+      title: 'Sr No',
+      dataIndex: 'srNo',
+      key: 'srNo',
+      width: '5%',
+    },
+    {
+      title: 'Website URL',
+      dataIndex: 'url',
+      key: 'url',
+      width: '20%',
+    },
+    {
+      title: 'Username',
+      dataIndex: 'username',
+      key: 'username',
+      width: '35%',
+    },
+    {
+      title: 'Password',
+      dataIndex: 'password',
+      key: 'password',
+      width: '35%',
+    },
+    {
+      title: 'Action',
+      key: 'action',
+      render: (_, record) => (
+        <Space size="middle">
+          <a href="#"><CiEdit /></a>
+          <a href="#"><MdDeleteForever /></a>
+        </Space>
+      ),
+      width: '5%',
+    },
+  ];
+
+  const webdata = [
+    {
+      key: '1',
+      srNo: '1',
+      url: 'https://test.diwise.in',
+      username:'new_user_diwise',
+      password:'new_user_diwise@2025',
+    },
+    {
+      key: '2',
+      srNo: '2',
+      url: 'https://test.diwise.in',
+      username:'new_user_diwise',
+      password:'new_user_diwise@2025',
+      
+    },
+    {
+      key: '3',
+      srNo: '3',
+      url: 'https://test.diwise.in',
+      username:'new_user_diwise',
+      password:'new_user_diwise@2025',
+    },
+  ];
+  //end website data
 
   return (
     <>
@@ -96,6 +164,20 @@ const Dashboard = () => {
           <p>Password: <span>this is password</span></p>
           </div>
         
+          </div>
+
+          {/* //-------------------Website login details ----------------// */}
+
+          <div className="fourth-section">
+            <h3>Website Login Details</h3>
+            <div className="website-list">
+              <Table 
+                columns={columnsweb} 
+                dataSource={webdata} 
+                pagination={{ pageSize: 5 }} 
+                bordered 
+              />
+            </div>
           </div>
         </div>
       </div>
