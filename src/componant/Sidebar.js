@@ -1,6 +1,7 @@
 import React from 'react'
 import "./sidebar.scss"
-import Dashboard from './dashboard/Dashboard'
+import { MdOutlineLogout } from 'react-icons/md'
+import { Link } from 'react-router-dom'
 const Sidebar = () => {
   return (
    <>
@@ -17,6 +18,12 @@ const Sidebar = () => {
         <li>saidigitek.com</li>
         <li>theteamdental.in</li>
     </ul>
+
+    <div className="logout-btn">
+      <Link to="/" className='btn'>Log Out
+      <div className="icon"><MdOutlineLogout /></div>
+       </Link>
+    </div>
    </div>
    </>
   )
