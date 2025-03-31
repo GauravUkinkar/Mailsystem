@@ -7,56 +7,74 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap:40px;
+    gap: 40px;
     //css for domain details
     .top-section {
       padding: 20px;
       background: white;
-      border-radius: 10px;display: flex;
+      border-radius: 10px;
+      display: flex;
       flex-direction: column;
-      gap:20px;
-      .domain-details{
+      gap: 20px;
+      .domain-details {
         display: flex;
-        gap:40px;
-        .detail-left, .detail-right{
-            display: flex;gap:30px;
-            // flex-direction: column;
+        gap: 40px;
+        align-items: flex-start;
+        justify-content: flex-start;
+        .detail-left,
+        .detail-right {
+          display: flex;
+          gap: 30px;
+
+          p {
+            color: black;
+            font-weight: 600;
+            font-size: 16px;
+          }
+
+          span {
+            color: rgb(66, 66, 66);
+            font-weight: 400;
+            font-size: 16px;
+          }
+        }
+      }
+
+      .login-detail {
+        display: flex;
+        gap: 40px;
+        align-items: flex-start;
+        justify-content: flex-start;
+
+        p {
+          color: black;
+          font-weight: 600;
+          font-size: 16px;
+        }
+
+        span {
+          color: rgb(66, 66, 66);
+          font-weight: 400;
+          font-size: 16px;
         }
       }
     }
 
-    //css for subdomain list 
-    .middle-section, .fourth-section{
-        display: flex;
-        background: white;
-        padding:20px;
-        border-radius: 10px;
-        flex-direction: column;
-        gap:20px;
-        .subdomain-list, .website-list{
-            display: flex;align-items: center;
-            flex-wrap: wrap;
-            gap:10px;
-        }
-    }
-
-    //css for third section - login details
-    .third-section{
+    //css for subdomain list
+    .middle-section,
+    .fourth-section {
       display: flex;
-      background:white;
-      padding:20px;
+      background: white;
+      padding: 20px;
       border-radius: 10px;
       flex-direction: column;
-      gap:20px;
-      .login-detail{
+      gap: 20px;
+      .subdomain-list,
+      .website-list {
         display: flex;
-        gap:20px;
-        p{
-          // color:black;
-          span{
-            color:rgba(0, 0, 0, 0.623);
-          }
-        }
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
       }
     }
   }
