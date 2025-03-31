@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import "./login.scss";
 import axios from "axios";
-const Login = () => {
+import { useNavigate } from "react-router-dom";
+const Login = ({onLogin}) => {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
+
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -15,7 +18,15 @@ const Login = () => {
         formData
       );
 
-      console.log(response, ">>>>>>>>>>>>>>>>>>>>>>>>");
+      if (response.status === 201) {
+        localStorage.setItem("isVerified", true);
+        navigate("/");
+        onLogin()
+      }
+
+
+   
+
     } catch (error) {
       console.log(error);
     }

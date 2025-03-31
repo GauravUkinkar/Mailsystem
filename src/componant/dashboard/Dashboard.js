@@ -8,7 +8,7 @@ import axios from "axios";
 const Dashboard = () => {
 
 
-const [getDomains, setGetDomians] = useState([]);
+const [getDomains, setGetDomains] = useState([]);
 
 
   //subdomain data
@@ -225,12 +225,14 @@ const [getDomains, setGetDomians] = useState([]);
         `${process.env.REACT_APP_API}api/domain/getAllDomain`
       );
 
-      console.log(response,">>>");
+      setGetDomains(response.data.data);
       
     } catch (error) {
       console.log(error);
     }
   };
+
+  console.log(getDomains,"??????");
 
 
   useEffect(() => {
@@ -252,7 +254,7 @@ const [getDomains, setGetDomians] = useState([]);
             <div className="domain-details">
               <div className="detail-left">
                 <p>
-                  Domain Name : <span>Lorem ipsum dolor sit.</span>{" "}
+                  Domain Name : <span>{getDomains?.[0]?.Domain}</span>{" "}
                 </p>
                 <p>
                   Purchase Platform : <span>15/3/24</span>{" "}
