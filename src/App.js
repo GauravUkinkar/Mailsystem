@@ -6,6 +6,7 @@ import AddDomain from './pages/add-domain/AddDomain';
 import Addmail from './pages/add-email/Addmail';
 import Header from './componant/Header';
 import Sidebar from './componant/Sidebar';
+import AddWebsite from './pages/add-website/AddWebsite';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
     <Route path='/' element={<Home/> } />
     <Route path='/add-domain' element={<AddDomain/> } />
     <Route path='/add-email' element={<Addmail /> } />
+    <Route path='/add-website' element={<AddWebsite /> } />
     
   </Routes>
   </BrowserRouter>
