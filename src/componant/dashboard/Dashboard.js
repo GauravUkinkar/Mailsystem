@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./dashboard.scss";
 import { Space, Table } from "antd";
 import { CiEdit } from "react-icons/ci";
 import { MdDeleteForever } from "react-icons/md";
+import axios from "axios";
 
 const Dashboard = () => {
+
+
+const [getDomains, setGetDomians] = useState([]);
+
+
   //subdomain data
   const columns = [
     {
@@ -74,7 +80,6 @@ const Dashboard = () => {
       dataIndex: "srNo",
       key: "srNo",
       width: "7%",
-
     },
     {
       title: "Website URL",
@@ -95,10 +100,10 @@ const Dashboard = () => {
       width: "19%",
     },
     {
-      title: 'Password',
-      dataIndex: 'password',
-      key: 'password',
-      width: '19%',
+      title: "Password",
+      dataIndex: "password",
+      key: "password",
+      width: "19%",
     },
     {
       title: "Action",
@@ -122,7 +127,7 @@ const Dashboard = () => {
       key: "1",
       srNo: "1",
       url: "https://test.diwise.in",
-      platform:"wordpress",
+      platform: "wordpress",
       username: "new_user_diwise",
       password: "new_user_diwise@2025",
     },
@@ -130,7 +135,7 @@ const Dashboard = () => {
       key: "2",
       srNo: "2",
       url: "https://test.diwise.in",
-      platform:"wordpress",
+      platform: "wordpress",
       username: "new_user_diwise",
       password: "new_user_diwise@2025",
     },
@@ -138,7 +143,7 @@ const Dashboard = () => {
       key: "3",
       srNo: "3",
       url: "https://test.diwise.in",
-      platform:"wordpress",
+      platform: "wordpress",
       username: "new_user_diwise",
       password: "new_user_diwise@2025",
     },
@@ -213,18 +218,37 @@ const Dashboard = () => {
   ];
   //end email data
 
+  // get all domains
+  const getAllDomains = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API}api/domain/getAllDomain`
+      );
+
+      console.log(response,">>>");
+      
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+  useEffect(() => {
+    getAllDomains();
+  }, [])
+
   return (
     <>
       <div className="dashboard-parent parent">
         <div className="dashboard-cont cont">
           {/* //----------------Top Section For All Details Related Domain---------------// */}
           <div className="top-section">
-           <div className="domain-deatil-heading">
-           <h3>Domain Details:</h3>
-            <span>
-              <CiEdit />
-            </span>
-           </div>
+            <div className="domain-deatil-heading">
+              <h3>Domain Details:</h3>
+              <span>
+                <CiEdit />
+              </span>
+            </div>
             <div className="domain-details">
               <div className="detail-left">
                 <p>
