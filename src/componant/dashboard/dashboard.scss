@@ -92,6 +92,14 @@
         align-items: center;
         flex-wrap: wrap;
         gap: 10px;
+        .ant-table-wrapper {
+          width: 100%;
+        }
+      }
+    }
+    .middle-section{
+      .under-middle{
+        display: flex;justify-content: space-between;
       }
     }
 

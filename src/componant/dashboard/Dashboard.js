@@ -1,14 +1,66 @@
 import React, { useEffect, useState } from "react";
 import "./dashboard.scss";
-import { Space, Table } from "antd";
+import { Input, Modal, Space, Table } from "antd";
 import { CiEdit } from "react-icons/ci";
 import { MdDeleteForever } from "react-icons/md";
+import { SearchOutlined } from "@ant-design/icons";
 import axios from "axios";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
+import TextArea from "antd/es/input/TextArea";
 
 const Dashboard = ({ getDomains }) => {
-  const [masterData, setMasterData] = useState([]);
+  const getColumnSearchProps = (dataIndex) => ({
+    filterDropdown: ({
+      setSelectedKeys,
+      selectedKeys,
+      confirm,
+      clearFilters,
+    }) => (
+      <div style={{ padding: 8 }}>
+        <Input
+          autoFocus
+          placeholder={`Search ${dataIndex}`}
+          value={selectedKeys[0]}
+          onChange={(e) =>
+            setSelectedKeys(e.target.value ? [e.target.value] : [])
+          }
+          onPressEnter={() => confirm()}
+          style={{ width: 188, marginBottom: 8, display: "block" }}
+        />
+        <Space>
+          <a
+            onClick={() => {
+              setSelectedKeys([]);
+              clearFilters();
+            }}
+          >
+            Reset
+          </a>
+          <a onClick={() => confirm()}>Search</a>
+        </Space>
+      </div>
+    ),
+    filterIcon: (filtered) => (
+      <SearchOutlined style={{ color: filtered ? "#1890ff" : undefined }} />
+    ),
+    onFilter: (value, record) =>
+      record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
+  });
 
+  const [masterData, setMasterData] = useState([]);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  // Functions to handle Modal state
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+  const handleOk = () => {
+    // Here you can add your logic to handle form submission
+    setIsModalVisible(false);
+  };
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
   //subdomain data
   const columns = [
     {
@@ -23,12 +75,14 @@ const Dashboard = ({ getDomains }) => {
       dataIndex: "subdomain",
       key: "subdomain",
       width: "20%",
+      ...getColumnSearchProps("subdomain"),
     },
     {
       title: "Description",
       dataIndex: "description",
       key: "description",
       width: "70%",
+      ...getColumnSearchProps("description"),
     },
     {
       title: "Action",
@@ -63,24 +117,28 @@ const Dashboard = ({ getDomains }) => {
       dataIndex: "websiteUrl",
       key: "websiteUrl",
       width: "20%",
+      ...getColumnSearchProps("websiteUrl"),
     },
     {
       title: "Website Platform",
       dataIndex: "websitePlatfrom",
       key: "websitePlatfrom",
       width: "20%",
+      ...getColumnSearchProps("websitePlatfrom"),
     },
     {
       title: "Username",
       dataIndex: "username",
       key: "username",
       width: "19%",
+      ...getColumnSearchProps("username"),
     },
     {
       title: "Password",
       dataIndex: "password",
       key: "password",
       width: "19%",
+      ...getColumnSearchProps("password"),
     },
     {
       title: "Action",
@@ -113,20 +171,23 @@ const Dashboard = ({ getDomains }) => {
     {
       title: "Webmail ID",
       dataIndex: "email",
-      key: "mail",
+      key: "email",
       width: "20%",
+      ...getColumnSearchProps("email"),
     },
     {
       title: "Mail Username",
       dataIndex: "mailusername",
       key: "mailusername",
       width: "30%",
+      ...getColumnSearchProps("mailusername"),
     },
     {
       title: "Mail Password",
       dataIndex: "mailpassword",
       key: "mailpassword",
       width: "30%",
+      ...getColumnSearchProps("mailpassword"),
     },
     {
       title: "Action",
@@ -161,9 +222,8 @@ const Dashboard = ({ getDomains }) => {
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
-
     if (getDomains.length > 0) {
-      const defaultId = getDomains[0]?.id; 
+      const defaultId = getDomains[0]?.id;
       console.log("Default ID:", defaultId);
 
       const id = searchParams.get("id");
@@ -218,7 +278,16 @@ const Dashboard = ({ getDomains }) => {
 
           {/* //----------------Details for all created subdomain -------------------// */}
           <div className="middle-section">
-            <h3>Subdomain List:</h3>
+            <div className="under-middle">
+              <h3>Subdomain List:</h3>
+              <div className="add-btn">
+                {" "}
+                <Link to="/" className="btn" onClick={showModal}>
+                  Add Subdomain
+                </Link> 
+              </div>
+            </div>
+
             <div className="subdomain-list">
               <Table
                 columns={columns}
@@ -257,6 +326,17 @@ const Dashboard = ({ getDomains }) => {
           </div>
         </div>
       </div>
+      <Modal
+        title="Add Subdomain"
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <p>Subdomain Name:</p>
+        <Input placeholder="Enter subdomain name" />
+        <p>Description:</p>
+        <TextArea placeholder="Enter description" rows={4} />
+      </Modal>
     </>
   );
 };
