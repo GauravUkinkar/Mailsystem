@@ -26,7 +26,8 @@ const Sidebar = ({ onLogout, getDomains }) => {
 
   const handleClick = (id) => {
     setActive(id); // Set active state
-    navigate(`/?id=${id}`, { replace: true }); // Update URL without full reload
+    navigate(`/?id=${id}`, { replace: true }); 
+    window.location.reload();
   };
 
   return (
