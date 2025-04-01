@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./addwebsite.scss";
 import axios from "axios";
 
-const AddWebsite = () => {
+const AddWebsite = ({getDomains}) => {
   const [error, setError] = useState({});
+
   const handleError = (valuesS) => {
     let error = {};
     if (!valuesS.websiteUrl) {
@@ -12,20 +13,29 @@ const AddWebsite = () => {
     if (!valuesS.websitePlatfrom) {
       error.websitePlatfrom = "Please Enter Your Website Platform";
     }
-    if (!valuesS.username) {
-      error.username = "Please Enter Your Username";
-    }
-    if (!valuesS.password) {
-      error.password = "Please Enter Your Password";
-    }
+
     return error;
   };
+
   const [webSite, setWebSite] = useState({
+    domainId: "",
     websiteUrl: "",
     websitePlatfrom: "",
     username: "",
+
     password: "",
   });
+
+
+  useEffect(() => {
+    if (getDomains?.id) {
+      setWebSite((prev) => ({
+        ...prev,
+        domainId: getDomains.id,
+      }));
+    }
+  }, [getDomains]);
+
 
   const handleWebsite = async (e) => {
     e.preventDefault();
@@ -42,10 +52,20 @@ const AddWebsite = () => {
         `${process.env.REACT_APP_API}api/website/addWebsite`,
         webSite
       );
+
+      alert("Domain Added Succefully");
+
+      setWebSite({
+        websiteUrl: "",
+        websitePlatfrom: "",
+        username: "",
+        password: "",
+      });
     } catch (error) {
       console.log(error);
     }
   };
+  
 
   return (
     <>
@@ -85,6 +105,25 @@ const AddWebsite = () => {
               <span className="error">{error.websitePlatfrom}</span>
             )}
             <label>
+               <label for="">
+              <p>Select Domain</p>
+              <select
+              
+                value={webSite.domainId}
+                onChange={(e) =>
+                  setWebSite({
+                    ...webSite,
+                    domainId:parseInt( e.target.value),
+                  })
+                }
+              >
+                {getDomains.map((item, index) => (
+                  <option value={item.id} key={index}>
+                    {item.Domain}
+                  </option>
+                ))}
+              </select>
+            </label>
               <p>Username</p>
               <input
                 type="text"
@@ -97,8 +136,7 @@ const AddWebsite = () => {
                 }
               />
             </label>
-            {error.username && (
-            <span className="error">{error.username}</span>)}
+
             <label>
               <p>Password</p>
               <input
@@ -112,7 +150,7 @@ const AddWebsite = () => {
                 }
               />
             </label>
-            {error.password && (<span className="error">{error.password}</span>)}
+
             <button class="btn" type="submit">
               Submit
             </button>

@@ -180,17 +180,17 @@ const Dashboard = ({ getDomains }) => {
     },
     {
       title: "Mail Username",
-      dataIndex: "mailusername",
-      key: "mailusername",
+      dataIndex: "username",
+      key: "username",
       width: "30%",
-      ...getColumnSearchProps("mailusername"),
+      ...getColumnSearchProps("username"),
     },
     {
       title: "Mail Password",
-      dataIndex: "mailpassword",
-      key: "mailpassword",
+      dataIndex: "password",
+      key: "password",
       width: "30%",
-      ...getColumnSearchProps("mailpassword"),
+      ...getColumnSearchProps("password"),
     },
     {
       title: "Action",
@@ -285,9 +285,9 @@ const Dashboard = ({ getDomains }) => {
               <h3>Subdomain List:</h3>
               <div className="add-btn">
                 {" "}
-                <Link to="/" className="btn" onClick={showModal}>
+                <div  className="btn" onClick={showModal}>
                   Add Subdomain
-                </Link>
+                </div>
               </div>
             </div>
 

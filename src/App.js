@@ -59,7 +59,7 @@ function App() {
             <Route path="/" element={<Home getDomains={getDomains} />} />
             <Route path="/add-domain" element={<AddDomain />} />
             <Route path="/add-email" element={<Addmail />} />
-            <Route path="/add-website" element={<AddWebsite />} />
+            <Route path="/add-website" element={<AddWebsite getDomains={getDomains} />} />
           </Routes>
         </>
       ) : (
