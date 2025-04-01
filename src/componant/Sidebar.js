@@ -12,17 +12,15 @@ const Sidebar = ({ onLogout, getDomains }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [active, setActive] = useState(searchParams.get("id"));
+  const [active, setActive] = useState();
 
-  console.log(active);
+const defaultId = getDomains[0]?.id;
+const idFromParams = searchParams.get("id");
 
-  useEffect(() => {
-    // Update active state when URL changes
-    const idFromParams = searchParams.get("id");
-    if (idFromParams) {
-      setActive(idFromParams);
-    }
-  }, [location.search]);
+useEffect(() => {
+  setActive(idFromParams || defaultId);
+}, [getDomains, searchParams]);
+
 
   const handleClick = (id) => {
     setActive(id); // Set active state
