@@ -3,6 +3,23 @@ import "./addwebsite.scss";
 import axios from "axios";
 
 const AddWebsite = () => {
+  const [error, setError] = useState({});
+  const handleError = (valuesS) => {
+    let error = {};
+    if (!valuesS.websiteUrl) {
+      error.websiteUrl = "Please Enter Your Website URL";
+    }
+    if (!valuesS.websitePlatfrom) {
+      error.websitePlatfrom = "Please Enter Your Website Platform";
+    }
+    if (!valuesS.username) {
+      error.username = "Please Enter Your Username";
+    }
+    if (!valuesS.password) {
+      error.password = "Please Enter Your Password";
+    }
+    return error;
+  };
   const [webSite, setWebSite] = useState({
     websiteUrl: "",
     websitePlatfrom: "",
@@ -10,7 +27,16 @@ const AddWebsite = () => {
     password: "",
   });
 
-  const handleWebsite = async () => {
+  const handleWebsite = async (e) => {
+    e.preventDefault();
+
+    const validationErrors = handleError(webSite);
+
+    setError(validationErrors);
+
+    if (Object.keys(validationErrors).length > 0) {
+      return false;
+    }
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_API}api/website/addWebsite`,
@@ -39,6 +65,9 @@ const AddWebsite = () => {
                 }
               />
             </label>
+            {error.websiteUrl && (
+              <span className="error">{error.websiteUrl}</span>
+            )}
             <label>
               <p>Website Platform</p>
               <input
@@ -52,6 +81,9 @@ const AddWebsite = () => {
                 }
               />
             </label>
+            {error.websitePlatfrom && (
+              <span className="error">{error.websitePlatfrom}</span>
+            )}
             <label>
               <p>Username</p>
               <input
@@ -65,6 +97,8 @@ const AddWebsite = () => {
                 }
               />
             </label>
+            {error.username && (
+            <span className="error">{error.username}</span>)}
             <label>
               <p>Password</p>
               <input
@@ -78,6 +112,7 @@ const AddWebsite = () => {
                 }
               />
             </label>
+            {error.password && (<span className="error">{error.password}</span>)}
             <button class="btn" type="submit">
               Submit
             </button>
