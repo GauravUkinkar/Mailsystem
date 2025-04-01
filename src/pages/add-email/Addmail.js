@@ -1,32 +1,147 @@
-import React from 'react';
-import './addemail.scss'
+import React, { useEffect, useState } from "react";
+import "./addemail.scss";
+import axios from "axios";
+import { useSearchParams } from "react-router-dom";
 const Addmail = () => {
+
+  // ADD Validation 
+  const [error, setError] = useState({});
+  const handleError = (values) =>{
+    let error = {};
+    if(!values.email){
+      error.email = "Please Enter Email";
+    }
+    if(!values.domainId || values.domainId === "selectdomain"){
+      error.domainId = "Please Selcect Domain Name";
+    }
+    if(!values.username){
+      error.username = "Please Enter Email Username";
+    }
+    if(!values.password){
+      error.password = "Please Enter Email Password";
+    }
+    return error;
+  };
+  //-------------------------------//
+
+
+  // const [searchParams] = useSearchParams();
+  // const paramId = searchParams.get("id");
+  const [emailadd, setEmailAdd] = useState({
+    email: "",
+    domainId: "",
+    username: "",
+    password: "",
+  });
+  console.log(emailadd , '>>>>>>>>>>>>>>>>')
+  const [domains, setDomains] = useState([]);
+
+  // call domain list api
+  const domainlist = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API}api/domain/getAllDomain`
+      );
+      // console.log(response.data.data, ">>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+      setDomains(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    domainlist();
+  }, []);
+
+  //--------------------------------------------------------
+  const handleEmail = async (e) => {
+    e.preventDefault()
+    const validationErrors = handleError(emailadd);
+    setError(validationErrors);
+    if (Object.keys(validationErrors).length > 0) {
+      return false;
+    }
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API}api/email/addEmail`,
+        emailadd
+      );
+
+      setEmailAdd({
+        email: "",
+        domainId:"",
+        username: "",
+        password: "",
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // useEffect(() => {
+  //   setEmailAdd((prev) => ({
+  //     ...prev,
+  //     domainId: paramId ? [paramId] : [],
+  //   }));
+  // }, [paramId]);
   return (
     <>
       <div className="add-email-parent parent">
         <div className="add-email-cont cont">
-          <form>
+          <form onSubmit={handleEmail}>
             <label>
               <p>Enter Email</p>
-              <input type="text" name="email" />
+              <input
+                type="text"
+                name="email"
+                value={emailadd.email}
+                onChange={(e) =>
+                  setEmailAdd({ ...emailadd, email: e.target.value })
+                }
+              />
             </label>
+            {error.email && <span className="error">{error.email}</span>}
             <label>
               <p>Select Domain</p>
-              <select name="domain">
-                <option value="">-- Select Domain --</option>
-                <option value="gmail.com">@gmail.com</option>
-                <option value="yahoo.com">@yahoo.com</option>
-                <option value="outlook.com">@outlook.com</option>
+              <select
+                id="domainSelect"
+                value={emailadd.domainId}
+                onChange={(e) =>
+                  setEmailAdd({ ...emailadd, domainId: parseInt(e.target.value) })
+                }
+                className={error.domainId ? "error-border" : ""}
+              >
+                <option value="selectdomain">Select a domain</option>
+                {domains.map((domain) => (
+                  <option key={domain.id} value={domain.id}>
+                    {domain.Domain}
+                  </option>
+                ))}
               </select>
             </label>
+            {error.domainID && <span className="error">{error.domainId}</span>}
             <label>
               <p>Username</p>
-              <input type="text" name="username" />
+              <input
+                type="text"
+                name="username"
+                value={emailadd.username}
+                onChange={(e) =>
+                  setEmailAdd({ ...emailadd, username: e.target.value })
+                }
+              />
             </label>
+            {error.username && <span className="error">{error.username}</span>}
             <label>
               <p>Password</p>
-              <input type="password" name="password" />
+              <input
+                type="password"
+                name="password"
+                value={emailadd.password}
+                onChange={(e) =>
+                  setEmailAdd({ ...emailadd, password: e.target.value })
+                }
+              />
             </label>
+            {error.password && <span className="error">{error.password}</span>}
             <button className="btn">submit</button>
           </form>
         </div>
