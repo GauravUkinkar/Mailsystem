@@ -28,7 +28,8 @@ const Dashboard = ({ getDomains }) => {
           style={{ width: 188, marginBottom: 8, display: "block" }}
         />
         <Space>
-          <a href
+          <a
+            href
             onClick={() => {
               setSelectedKeys([]);
               clearFilters();
@@ -36,7 +37,9 @@ const Dashboard = ({ getDomains }) => {
           >
             Reset
           </a>
-          <a href onClick={() => confirm()}>Search</a>
+          <a href onClick={() => confirm()}>
+            Search
+          </a>
         </Space>
       </div>
     ),
@@ -284,7 +287,7 @@ const Dashboard = ({ getDomains }) => {
                 {" "}
                 <Link to="/" className="btn" onClick={showModal}>
                   Add Subdomain
-                </Link> 
+                </Link>
               </div>
             </div>
 
