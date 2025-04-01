@@ -12,11 +12,12 @@ const Sidebar = ({ onLogout, getDomains }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [active, setActive] = useState(
-    searchParams.get("id") || getDomains[0]?.domainId
-  );
+  const [active, setActive] = useState(searchParams.get("id"));
+
+  console.log(active);
 
   useEffect(() => {
+    // Update active state when URL changes
     const idFromParams = searchParams.get("id");
     if (idFromParams) {
       setActive(idFromParams);
@@ -24,20 +25,20 @@ const Sidebar = ({ onLogout, getDomains }) => {
   }, [location.search]);
 
   const handleClick = (id) => {
-    setActive(id);
-    navigate(`/?id=${id}`, { replace: true });
+    setActive(id); // Set active state
+    navigate(`/?id=${id}`, { replace: true }); // Update URL without full reload
   };
 
   return (
     <>
       <div className="sidebar-parent">
         <ul className="list">
-          {getDomains.map((item, index) => (
+          {getDomains.map((item) => (
             <li
-              key={index.domainId}
+              key={item.id}
               onClick={() => handleClick(item.id)}
-              className={`sidebar-item ${
-                active === item.domainId ? "active" : ""
+              className={`${
+                Number(active) === item.id ? "active side_item" : "side_item"
               }`}
             >
               {item.Domain}
