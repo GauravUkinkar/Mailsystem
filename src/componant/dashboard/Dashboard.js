@@ -4,8 +4,10 @@ import { Space, Table } from "antd";
 import { CiEdit } from "react-icons/ci";
 import { MdDeleteForever } from "react-icons/md";
 import axios from "axios";
+import { useSearchParams } from "react-router-dom";
 
-const Dashboard = () => {
+const Dashboard = ({ getDomains }) => {
+  const [masterData, setMasterData] = useState([]);
 
   //subdomain data
   const columns = [
@@ -14,11 +16,12 @@ const Dashboard = () => {
       dataIndex: "srNo",
       key: "srNo",
       width: "5%",
+      render: (text, record, index) => index + 1,
     },
     {
       title: "Subdomain Name",
-      dataIndex: "name",
-      key: "name",
+      dataIndex: "subdomain",
+      key: "subdomain",
       width: "20%",
     },
     {
@@ -44,29 +47,6 @@ const Dashboard = () => {
     },
   ];
 
-  const data = [
-    {
-      key: "1",
-      srNo: "1",
-      name: "test.diwise.in",
-      description:
-        "I ve added a Sr No column and adjusted the column widths to distribute 100% evenly. Let me know if yod like further adjustments or styling enhancements!",
-    },
-    {
-      key: "2",
-      srNo: "2",
-      name: "Jim Green",
-      description:
-        "I ve added a Sr No column and adjusted the column widths to distribute 100% evenly. Let me know if yod like further adjustments or styling enhancements!",
-    },
-    {
-      key: "3",
-      srNo: "3",
-      name: "Joe Black",
-      description:
-        "I ve added a Sr No column and adjusted the column widths to distribute 100% evenly. Let me know if yod like further adjustments or styling enhancements!",
-    },
-  ];
   //end subdomain data
 
   //website data
@@ -75,18 +55,19 @@ const Dashboard = () => {
       title: "Sr No",
       dataIndex: "srNo",
       key: "srNo",
-      width: "7%",
+      width: "5%",
+      render: (text, record, index) => index + 1,
     },
     {
       title: "Website URL",
-      dataIndex: "url",
-      key: "url",
+      dataIndex: "websiteUrl",
+      key: "websiteUrl",
       width: "20%",
     },
     {
       title: "Website Platform",
-      dataIndex: "platform",
-      key: "platform",
+      dataIndex: "websitePlatfrom",
+      key: "websitePlatfrom",
       width: "20%",
     },
     {
@@ -118,32 +99,6 @@ const Dashboard = () => {
     },
   ];
 
-  const webdata = [
-    {
-      key: "1",
-      srNo: "1",
-      url: "https://test.diwise.in",
-      platform: "wordpress",
-      username: "new_user_diwise",
-      password: "new_user_diwise@2025",
-    },
-    {
-      key: "2",
-      srNo: "2",
-      url: "https://test.diwise.in",
-      platform: "wordpress",
-      username: "new_user_diwise",
-      password: "new_user_diwise@2025",
-    },
-    {
-      key: "3",
-      srNo: "3",
-      url: "https://test.diwise.in",
-      platform: "wordpress",
-      username: "new_user_diwise",
-      password: "new_user_diwise@2025",
-    },
-  ];
   //end website data
 
   //Email data
@@ -152,11 +107,12 @@ const Dashboard = () => {
       title: "Sr No",
       dataIndex: "srNo",
       key: "srNo",
-      width: "10%",
+      width: "5%",
+      render: (text, record, index) => index + 1,
     },
     {
       title: "Webmail ID",
-      dataIndex: "mail",
+      dataIndex: "email",
       key: "mail",
       width: "20%",
     },
@@ -189,31 +145,31 @@ const Dashboard = () => {
     },
   ];
 
-  const emaildata = [
-    {
-      key: "1",
-      srNo: "1",
-      mail: "info@diwise.in",
-      mailusername: "new_user_diwise",
-      mailpassword: "new_user_diwise@2025",
-    },
-    {
-      key: "2",
-      srNo: "2",
-      mail: "info@diwise.in",
-      mailusername: "new_user_diwise",
-      mailpassword: "new_user_diwise@2025",
-    },
-    {
-      key: "3",
-      srNo: "3",
-      mail: "info@diwise.in",
-      mailusername: "new_user_diwise",
-      mailpassword: "new_user_diwise@2025",
-    },
-  ];
   //end email data
 
+  const handleMasterData = async (id) => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API}api/domain/getMasterDataId?domainId=${id}`
+      );
+
+      setMasterData(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const [searchParams] = useSearchParams();
+
+  useEffect(() => {
+
+    if (getDomains.length > 0) {
+      const defaultId = getDomains[0]?.id; 
+      console.log("Default ID:", defaultId);
+
+      const id = searchParams.get("id");
+      handleMasterData(id || defaultId);
+    }
+  }, [getDomains]);
 
   return (
     <>
@@ -230,39 +186,43 @@ const Dashboard = () => {
             <div className="domain-details">
               <div className="detail-left">
                 <p>
-                  Domain Name : <span>abc</span>{" "}
+                  Domain Name : <span>{masterData?.[0]?.Domain}</span>{" "}
                 </p>
                 <p>
-                  Purchase Platform : <span>15/3/24</span>{" "}
+                  Purchase Platform :{" "}
+                  <span>{masterData?.[0]?.purchasePlatform}</span>{" "}
                 </p>
                 <p>
-                  Purchase Date : <span>pqr</span>{" "}
+                  Purchase Date :{" "}
+                  <span>{masterData?.[0]?.purchaseDate.split("T")[0]}</span>{" "}
                 </p>
                 <p>
-                  Expiry Date : <span>12/2/25</span>{" "}
+                  Expiry Date :{" "}
+                  <span>{masterData?.[0]?.expiryDate.split("T")[0]}</span>{" "}
                 </p>
               </div>
             </div>
 
             <div className="login-detail">
               <p>
-                Login URL : <span>https://hotinger.com</span>
+                Login URL : <span>{masterData?.[0]?.platformUrl}</span>
               </p>
               <p>
-                User Name : <span>this is username</span>
+                User Name : <span>{masterData?.[0]?.username}</span>
               </p>
               <p>
-                Password : <span>this is password</span>
+                Password : <span>{masterData?.[0]?.password}</span>
               </p>
             </div>
           </div>
+
           {/* //----------------Details for all created subdomain -------------------// */}
           <div className="middle-section">
             <h3>Subdomain List:</h3>
             <div className="subdomain-list">
               <Table
                 columns={columns}
-                dataSource={data}
+                dataSource={masterData[0]?.subdomains || null}
                 pagination={{ pageSize: 5 }}
                 bordered
               />
@@ -276,7 +236,7 @@ const Dashboard = () => {
             <div className="website-list">
               <Table
                 columns={columnsweb}
-                dataSource={webdata}
+                dataSource={masterData[0]?.websites}
                 pagination={{ pageSize: 5 }}
                 bordered
               />
@@ -289,7 +249,7 @@ const Dashboard = () => {
             <div className="email-list">
               <Table
                 columns={columnsemail}
-                dataSource={emaildata}
+                dataSource={masterData[0]?.emails}
                 pagination={{ pageSize: 5 }}
                 bordered
               />
