@@ -62,7 +62,7 @@ const Dashboard = ({ getDomains }) => {
     setIsModalVisible(false);
   };
   const handleCancel = () => {
-    setIsModalVisible(false);
+    setIsModalVisible(false); 
   };
   //subdomain data
   const columns = [
