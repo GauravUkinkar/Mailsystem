@@ -3,12 +3,12 @@ import "./home.scss";
 import Dashboard from "../componant/dashboard/Dashboard";
 
 
-const Home = () => {
+const Home = ({ getDomains }) => {
 
 
   return (
     <>
-     <Dashboard />
+     <Dashboard getDomains={ getDomains } />
     </>
   );
 };

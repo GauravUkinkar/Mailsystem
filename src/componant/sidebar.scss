@@ -6,9 +6,8 @@
   width: 250px;
   background: var(--black);
   height: calc(100vh - 60px);
-  align-items:center;
+  align-items: flex-start;
   flex-direction: column;
-
   justify-content: space-between;
 
   .list {
@@ -29,6 +28,7 @@
       &:hover {
         background: rgba(214, 213, 213, 0.329);
       }
+     
     }
   }
   .logout-btn {
@@ -36,19 +36,17 @@
     background: rgb(255, 255, 255);
     margin: 10px;
     border-radius: 10px;
-   .btn{
+    .btn {
       padding: 10px;
-      color:black;
+      color: black;
       display: flex;
-      gap:10px;
-      background:rgba(214, 213, 213, 0.329);
-      &:hover{
-       background:black;
-       color:white;
-       border:1px solid rgba(214, 213, 213, 0.329);
+      gap: 10px;
+      background: rgba(214, 213, 213, 0.329);
+      &:hover {
+        background: black;
+        color: white;
+        border: 1px solid rgba(214, 213, 213, 0.329);
       }
-
     }
-
   }
 }

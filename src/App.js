@@ -8,9 +8,11 @@ import Header from "./componant/Header";
 import Sidebar from "./componant/Sidebar";
 import AddWebsite from "./pages/add-website/AddWebsite";
 import Login from "./pages/Login/Login";
+import axios from "axios";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("isVerified"));
+  const [getDomains, setGetDomains] = useState([]);
 
   useEffect(() => {
     const localData = localStorage.getItem("isVerified");
@@ -29,14 +31,32 @@ function App() {
     localStorage.removeItem("isVerified");
   };
 
+  // get all domains
+  const getAllDomains = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API}api/domain/getAllDomain`
+      );
+
+      setGetDomains(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getAllDomains();
+  }, []);
+
+  
   return (
     <BrowserRouter>
       {isLoggedIn ? (
         <>
-          <Sidebar onLogout={onLogout} />
+          <Sidebar onLogout={onLogout} getDomains={getDomains} />
           <Header />
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home getDomains={getDomains} />} />
             <Route path="/add-domain" element={<AddDomain />} />
             <Route path="/add-email" element={<Addmail />} />
             <Route path="/add-website" element={<AddWebsite />} />
