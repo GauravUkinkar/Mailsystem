@@ -12,8 +12,11 @@ import axios from "axios";
 import Notification from "./componant/notification/Notification";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("isVerified"));
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    !!localStorage.getItem("isVerified")
+  );
   const [getDomains, setGetDomains] = useState([]);
+  const [activeNotify, setActiveNotify] = useState();
 
   useEffect(() => {
     const localData = localStorage.getItem("isVerified");
@@ -49,19 +52,24 @@ function App() {
     getAllDomains();
   }, []);
 
-  
   return (
     <BrowserRouter>
       {isLoggedIn ? (
         <>
           <Sidebar onLogout={onLogout} getDomains={getDomains} />
-          <Header />
+          <Header activeNotify={activeNotify} />
           <Routes>
             <Route path="/" element={<Home getDomains={getDomains} />} />
             <Route path="/add-domain" element={<AddDomain />} />
             <Route path="/add-email" element={<Addmail />} />
-            <Route path="/add-website" element={<AddWebsite getDomains={getDomains} />} />
-            <Route path="/notification" element={<Notification />} />
+            <Route
+              path="/add-website"
+              element={<AddWebsite getDomains={getDomains} />}
+            />
+            <Route
+              path="/notification"
+              element={<Notification setActiveNotify={setActiveNotify} />}
+            />
           </Routes>
         </>
       ) : (

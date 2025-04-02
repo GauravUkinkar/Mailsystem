@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Notification.scss";
 import axios from "axios";
 
-function Notification() {
+function Notification({ setActiveNotify }) {
 
 
 const [notify, setNotify] = useState([]);
@@ -12,9 +12,11 @@ const handleNotification = async () => {
     try {
         const response = await axios.get(`${process.env.REACT_APP_API}api/domain/domainExpiryController`)
 
-        console.log(response.data.data,"::::::");
-        setNotify(response.data.data);
        
+        setNotify(response.data.data);
+        setActiveNotify(response.data.data.length)
+       
+        console.log(response.data.data.length,"length");
         
     } catch (error) {
         console.log(error);
