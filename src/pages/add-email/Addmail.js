@@ -65,7 +65,7 @@ const Addmail = () => {
         `${process.env.REACT_APP_API}api/email/addEmail`,
         emailadd
       );
-
+      alert("Mail Added Succefully");
       setEmailAdd({
         email: "",
         domainId:"",

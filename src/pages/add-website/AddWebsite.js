@@ -28,10 +28,10 @@ const AddWebsite = ({getDomains}) => {
 
 
   useEffect(() => {
-    if (getDomains?.id) {
+    if (getDomains[0]?.id) {
       setWebSite((prev) => ({
         ...prev,
-        domainId: getDomains.id,
+        domainId: getDomains[0]?.id,
       }));
     }
   }, [getDomains]);
