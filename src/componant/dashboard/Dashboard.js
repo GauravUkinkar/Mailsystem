@@ -9,6 +9,52 @@ import { Link, useSearchParams } from "react-router-dom";
 import TextArea from "antd/es/input/TextArea";
 
 const Dashboard = ({ getDomains }) => {
+  const defaultId = getDomains[0]?.id;
+
+  const [subdomain, setSubdomain] = useState({
+    domainId: defaultId,
+    subdomain: "",
+    description: "",
+  });
+
+  const [searchParams] = useSearchParams();
+
+  useEffect(() => {
+    const paramId = searchParams.get("id");
+
+    setSubdomain((prev) => ({
+      ...prev,
+      domainId: Number(paramId || defaultId),
+    }));
+  }, [searchParams, defaultId]);
+
+  const handleSubdomain = async () => {
+    console.log("button trigere");
+    try {
+      if (subdomain.subdomain === "" || subdomain.description === "") {
+        alert("filter are not empty");
+        return;
+      }
+      const response = await axios.post(
+        `${process.env.REACT_APP_API}api/subdomain/addSubdomain`,
+        subdomain
+      );
+      console.log(response, ">>>>>>>> API Response");
+      alert("Subdomain Added Successfully");
+      window.location.reload();
+      // Preserve `domainId` when resetting state
+      setSubdomain({
+        domainId: 0,
+        subdomain: "",
+        description: "",
+      });
+
+      setIsModalVisible(false); // Close modal after successful submission
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({
       setSelectedKeys,
@@ -53,14 +99,11 @@ const Dashboard = ({ getDomains }) => {
   const [masterData, setMasterData] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  // Functions to handle Modal state
+  // Modal Handlers
   const showModal = () => {
     setIsModalVisible(true);
   };
-  const handleOk = () => {
-    // Here you can add your logic to handle form submission
-    setIsModalVisible(false);
-  };
+
   const handleCancel = () => {
     setIsModalVisible(false);
   };
@@ -222,7 +265,6 @@ const Dashboard = ({ getDomains }) => {
       console.log(error);
     }
   };
-  const [searchParams] = useSearchParams();
 
   useEffect(() => {
     if (getDomains.length > 0) {
@@ -332,14 +374,34 @@ const Dashboard = ({ getDomains }) => {
       <Modal
         title="Add Subdomain"
         visible={isModalVisible}
-        onOk={handleOk}
+        onOk={handleSubdomain}
         onCancel={handleCancel}
       >
         <p>Subdomain Name:</p>
-        <Input placeholder="Enter subdomain name" />
+        <Input
+          placeholder="Enter subdomain name"
+          value={subdomain.subdomain}
+          onChange={(e) =>
+            setSubdomain((prev) => ({
+              ...prev,
+              subdomain: e.target.value,
+            }))
+          }
+        />
         <p>Description:</p>
-        <TextArea placeholder="Enter description" rows={4} />
+        <TextArea
+          placeholder="Enter description"
+          rows={4}
+          value={subdomain.description}
+          onChange={(e) =>
+            setSubdomain((prev) => ({
+              ...prev,
+              description: e.target.value,
+            }))
+          }
+        />
       </Modal>
+      ;
     </>
   );
 };
