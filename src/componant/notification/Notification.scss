@@ -7,6 +7,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+    gap: calc(var(--unit));
+
 
     .main-wrapper {
       padding: 20px;
@@ -17,6 +20,7 @@
       width: 100%;
       gap: calc(var(--unit));
 
+
       .notify-deatil-heading {
       }
 
@@ -24,6 +28,17 @@
         display: flex;
         flex-direction: column;
         gap: calc(var(--unit) / 2);
+
+        .one{
+            display: flex;
+            gap: calc(var(--unit) * 5);
+        }
+
+        .two{
+            display: flex;
+            gap: calc(var(--unit) * 5);
+
+        }
         p {
           color: black;
           font-weight: 600;

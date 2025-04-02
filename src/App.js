@@ -16,7 +16,7 @@ function App() {
     !!localStorage.getItem("isVerified")
   );
   const [getDomains, setGetDomains] = useState([]);
-  const [activeNotify, setActiveNotify] = useState();
+
 
   useEffect(() => {
     const localData = localStorage.getItem("isVerified");
@@ -57,7 +57,7 @@ function App() {
       {isLoggedIn ? (
         <>
           <Sidebar onLogout={onLogout} getDomains={getDomains} />
-          <Header activeNotify={activeNotify} />
+          <Header  />
           <Routes>
             <Route path="/" element={<Home getDomains={getDomains} />} />
             <Route path="/add-domain" element={<AddDomain />} />
@@ -68,7 +68,7 @@ function App() {
             />
             <Route
               path="/notification"
-              element={<Notification setActiveNotify={setActiveNotify} />}
+              element={<Notification />}
             />
           </Routes>
         </>
