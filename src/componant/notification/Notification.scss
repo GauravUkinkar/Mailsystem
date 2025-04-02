@@ -1,0 +1,49 @@
+.notify-parent {
+  margin-top: 100px;
+  width: calc(100% - 250px);
+  margin-left: 250px;
+
+  .notify-cont {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .main-wrapper {
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      gap: calc(var(--unit));
+
+      .notify-deatil-heading {
+      }
+
+      .notify-details {
+        display: flex;
+        flex-direction: column;
+        gap: calc(var(--unit) / 2);
+        p {
+          color: black;
+          font-weight: 600;
+          font-size: 16px;
+        }
+
+        span {
+          color: rgb(66, 66, 66);
+          font-weight: 400;
+          font-size: 16px;
+        }
+
+        .expiredate {
+          &.active {
+            span {
+              color: orangered;
+            }
+          }
+        }
+      }
+    }
+  }
+}

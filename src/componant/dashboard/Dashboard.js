@@ -62,7 +62,7 @@ const Dashboard = ({ getDomains }) => {
     setIsModalVisible(false);
   };
   const handleCancel = () => {
-    setIsModalVisible(false); 
+    setIsModalVisible(false);
   };
   //subdomain data
   const columns = [
@@ -259,7 +259,7 @@ const Dashboard = ({ getDomains }) => {
                   Purchase Date :{" "}
                   <span>{masterData?.[0]?.purchaseDate.split("T")[0]}</span>{" "}
                 </p>
-                <p>
+                <p  className={masterData?.[0]?.expiryStatus === 1 ? "active  expiredate" : ""}>
                   Expiry Date :{" "}
                   <span>{masterData?.[0]?.expiryDate.split("T")[0]}</span>{" "}
                 </p>
@@ -285,7 +285,7 @@ const Dashboard = ({ getDomains }) => {
               <h3>Subdomain List:</h3>
               <div className="add-btn">
                 {" "}
-                <div  className="btn" onClick={showModal}>
+                <div className="btn" onClick={showModal}>
                   Add Subdomain
                 </div>
               </div>

@@ -9,6 +9,7 @@ import Sidebar from "./componant/Sidebar";
 import AddWebsite from "./pages/add-website/AddWebsite";
 import Login from "./pages/Login/Login";
 import axios from "axios";
+import Notification from "./componant/notification/Notification";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("isVerified"));
@@ -60,6 +61,7 @@ function App() {
             <Route path="/add-domain" element={<AddDomain />} />
             <Route path="/add-email" element={<Addmail />} />
             <Route path="/add-website" element={<AddWebsite getDomains={getDomains} />} />
+            <Route path="/notification" element={<Notification />} />
           </Routes>
         </>
       ) : (
