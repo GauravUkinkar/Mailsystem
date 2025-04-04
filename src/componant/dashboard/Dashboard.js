@@ -246,9 +246,9 @@ const Dashboard = ({ getDomains }) => {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <a href="#">
+          <Link to={`add-email?id=${masterData?.[0]?.domainId}`}>
             <CiEdit />
-          </a>
+          </Link>
           <a href="#">
             <MdDeleteForever />
           </a>

@@ -1,39 +1,59 @@
 import React, { useEffect, useState } from "react";
 import "./addemail.scss";
 import axios from "axios";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 const Addmail = () => {
-
-  // ADD Validation 
+  // ADD Validation
   const [error, setError] = useState({});
-  const handleError = (values) =>{
+
+  const navigate = useNavigate();
+  const handleError = (values) => {
     let error = {};
-    if(!values.email){
+    if (!values.email) {
       error.email = "Please Enter Email";
     }
-    if(!values.domainId || values.domainId === "selectdomain"){
+    if (!values.domainId || values.domainId === "selectdomain") {
       error.domainId = "Please Selcect Domain Name";
     }
-    if(!values.username){
+    if (!values.username) {
       error.username = "Please Enter Email Username";
     }
-    if(!values.password){
+    if (!values.password) {
       error.password = "Please Enter Email Password";
     }
     return error;
   };
   //-------------------------------//
 
+  const [searchParams] = useSearchParams();
+  const id = searchParams.get("id");
+  console.log(id, "id from search params");
 
-  // const [searchParams] = useSearchParams();
-  // const paramId = searchParams.get("id");
   const [emailadd, setEmailAdd] = useState({
     email: "",
     domainId: "",
     username: "",
     password: "",
   });
-  console.log(emailadd , '>>>>>>>>>>>>>>>>')
+
+  const handleEmailByid = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API}api/email/getEmailByid?emailId=${id}`
+      );
+
+      setEmailAdd({
+        email: response.data.data[0].email,
+        domainId: response.data.data[0].domainId,
+        platform: response.data.data[0].platform,
+        username: response.data.data[0].username,
+        password: response.data.data[0].password,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const [domains, setDomains] = useState([]);
 
   // call domain list api
@@ -50,26 +70,42 @@ const Addmail = () => {
   };
   useEffect(() => {
     domainlist();
+    handleEmailByid();
   }, []);
 
   //--------------------------------------------------------
   const handleEmail = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const validationErrors = handleError(emailadd);
     setError(validationErrors);
     if (Object.keys(validationErrors).length > 0) {
       return false;
     }
+    
     try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_API}api/email/addEmail`,
-        emailadd
-      );
-      alert("Mail Added Succefully");
+      let response;
+
+      if (id) {
+        response = await axios.put(
+          `${process.env.REACT_APP_API}api/email/emailEdit?emailId=${id}`,
+          emailadd
+        );        
+      } else {
+        response = await axios.post(
+          `${process.env.REACT_APP_API}api/email/addEmail`,
+          emailadd
+        );        
+      }
+
+      if (response.status === 200) {
+        navigate("/");
+      }
+      alert(id ? "Mail Updated Succefully" : "Mail Added Succefully");
+
       setEmailAdd({
         email: "",
-        platform:"",
-        domainId:"",
+        platform: "",
+        domainId: "",
         username: "",
         password: "",
       });
@@ -77,12 +113,7 @@ const Addmail = () => {
       console.log(error);
     }
   };
-  // useEffect(() => {
-  //   setEmailAdd((prev) => ({
-  //     ...prev,
-  //     domainId: paramId ? [paramId] : [],
-  //   }));
-  // }, [paramId]);
+
   return (
     <>
       <div className="add-email-parent parent">
@@ -117,7 +148,10 @@ const Addmail = () => {
                 id="domainSelect"
                 value={emailadd.domainId}
                 onChange={(e) =>
-                  setEmailAdd({ ...emailadd, domainId: parseInt(e.target.value) })
+                  setEmailAdd({
+                    ...emailadd,
+                    domainId: parseInt(e.target.value),
+                  })
                 }
                 className={error.domainId ? "error-border" : ""}
               >

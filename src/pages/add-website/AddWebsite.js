@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./addwebsite.scss";
 import axios from "axios";
 
-const AddWebsite = ({getDomains}) => {
+const AddWebsite = ({ getDomains }) => {
   const [error, setError] = useState({});
 
   const handleError = (valuesS) => {
@@ -26,7 +26,6 @@ const AddWebsite = ({getDomains}) => {
     password: "",
   });
 
-
   useEffect(() => {
     if (getDomains[0]?.id) {
       setWebSite((prev) => ({
@@ -35,7 +34,6 @@ const AddWebsite = ({getDomains}) => {
       }));
     }
   }, [getDomains]);
-
 
   const handleWebsite = async (e) => {
     e.preventDefault();
@@ -65,7 +63,6 @@ const AddWebsite = ({getDomains}) => {
       console.log(error);
     }
   };
-  
 
   return (
     <>
@@ -105,25 +102,24 @@ const AddWebsite = ({getDomains}) => {
               <span className="error">{error.websitePlatfrom}</span>
             )}
             <label>
-               <label for="">
-              <p>Select Domain</p>
-              <select
-              
-                value={webSite.domainId}
-                onChange={(e) =>
-                  setWebSite({
-                    ...webSite,
-                    domainId:parseInt( e.target.value),
-                  })
-                }
-              >
-                {getDomains.map((item, index) => (
-                  <option value={item.id} key={index}>
-                    {item.Domain}
-                  </option>
-                ))}
-              </select>
-            </label>
+              <label for="">
+                <p>Select Domain</p>
+                <select
+                  value={webSite.domainId}
+                  onChange={(e) =>
+                    setWebSite({
+                      ...webSite,
+                      domainId: parseInt(e.target.value),
+                    })
+                  }
+                >
+                  {getDomains.map((item, index) => (
+                    <option value={item.id} key={index}>
+                      {item.Domain}
+                    </option>
+                  ))}
+                </select>
+              </label>
               <p>Username</p>
               <input
                 type="text"
