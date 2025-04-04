@@ -68,6 +68,7 @@ const Addmail = () => {
       alert("Mail Added Succefully");
       setEmailAdd({
         email: "",
+        platform:"",
         domainId:"",
         username: "",
         password: "",
@@ -95,6 +96,17 @@ const Addmail = () => {
                 value={emailadd.email}
                 onChange={(e) =>
                   setEmailAdd({ ...emailadd, email: e.target.value })
+                }
+              />
+            </label>
+            <label>
+              <p>Mail Platform</p>
+              <input
+                type="text"
+                name="platform"
+                value={emailadd.platform}
+                onChange={(e) =>
+                  setEmailAdd({ ...emailadd, platform: e.target.value })
                 }
               />
             </label>

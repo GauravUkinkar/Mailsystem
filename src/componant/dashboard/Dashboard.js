@@ -222,6 +222,13 @@ const Dashboard = ({ getDomains }) => {
       ...getColumnSearchProps("email"),
     },
     {
+      title: "Mail Platform",
+      dataIndex: "platform",
+      key: "platform",
+      width: "20%",
+      ...getColumnSearchProps("platform"),
+    },
+    {
       title: "Mail Username",
       dataIndex: "username",
       key: "username",
