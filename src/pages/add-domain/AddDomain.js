@@ -94,7 +94,7 @@ function AddDomain({ getAllDomains }) {
       } else {
         response = await axios.post(
           `${process.env.REACT_APP_API}api/domain/addDomian`,
-          domainAdd
+          domainAdd 
         );
       }
       if (response.status === 200) {
