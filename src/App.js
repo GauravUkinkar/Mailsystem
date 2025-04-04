@@ -60,7 +60,7 @@ function App() {
           <Header  />
           <Routes>
             <Route path="/" element={<Home getDomains={getDomains} />} />
-            <Route path="/add-domain" element={<AddDomain />} />
+            <Route path="/add-domain" element={<AddDomain getAllDomains={getAllDomains} />  } />
             <Route path="/add-email" element={<Addmail />} />
             <Route
               path="/add-website"

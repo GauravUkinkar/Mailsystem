@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./AddDomain.scss";
 import axios from "axios";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
-function AddDomain() {
+function AddDomain({ getAllDomains }) {
   const [error, setError] = useState({});
+
+  const navigate = useNavigate();
 
   const handleError = (values) => {
     let error = {};
@@ -82,18 +84,25 @@ function AddDomain() {
     }
 
     try {
+      let response;
+
       if (id) {
-        const response = await axios.put(
-          `${process.env.REACT_APP_API}api/domain/domainEdit?domainId=1`
+        response = await axios.put(
+          `${process.env.REACT_APP_API}api/domain/domainEdit?domainId=${id}`,
+          domainAdd
         );
-      }else{
-        const response = await axios.post(
+      } else {
+        response = await axios.post(
           `${process.env.REACT_APP_API}api/domain/addDomian`,
           domainAdd
         );
       }
+      if (response.status === 200) {
+        navigate("/");
+      }
 
-      alert("Domain Added Succefully");
+      alert(id ? "Domain Updated Succefully" : "Domain Added Succefully");
+      getAllDomains()
 
       setDomainAdd({
         Domain: "",
