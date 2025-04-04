@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./AddDomain.scss";
 import axios from "axios";
-
+import { useSearchParams } from "react-router-dom";
 
 function AddDomain() {
   const [error, setError] = useState({});
@@ -44,6 +44,33 @@ function AddDomain() {
     password: "",
   });
 
+  const [searchParams] = useSearchParams();
+  const id = searchParams.get("id");
+
+  const getDataById = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API}api/domain/getMasterDataId?domainId=${id}`
+      );
+
+      setDomainAdd({
+        Domain: response.data.data[0].Domain,
+        purchasePlatform: response.data.data[0].purchasePlatform,
+        purchaseDate: response.data.data[0].purchaseDate.split("T")[0],
+        expiryDate: response.data.data[0].expiryDate.split("T")[0],
+        platformUrl: response.data.data[0].platformUrl,
+        username: response.data.data[0].username,
+        password: response.data.data[0].password,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getDataById();
+  }, []);
+
   const handleAddDomain = async (e) => {
     e.preventDefault();
 
@@ -55,13 +82,18 @@ function AddDomain() {
     }
 
     try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_API}api/domain/addDomian`,
-        domainAdd
-      );
+      if (id) {
+        const response = await axios.put(
+          `${process.env.REACT_APP_API}api/domain/domainEdit?domainId=1`
+        );
+      }else{
+        const response = await axios.post(
+          `${process.env.REACT_APP_API}api/domain/addDomian`,
+          domainAdd
+        );
+      }
 
       alert("Domain Added Succefully");
-      
 
       setDomainAdd({
         Domain: "",

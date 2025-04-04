@@ -105,3 +105,27 @@ a {
   }
 }
 
+.ant-space-item{
+  a{
+    font-size: 14px;
+    border: 1px solid rgba(0, 0, 0, 0.39);
+    border-radius: calc(var(--unit) / 4);
+    padding: calc(var(--unit) / 4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: black;
+  }
+}
+
+:where(.css-dev-only-do-not-override-tjsggz).ant-pagination .ant-pagination-item-active  {
+  border: 1px solid rgba(0, 0, 0, 0.39);
+  color: black;
+
+}
+
+:where(.css-dev-only-do-not-override-tjsggz).ant-pagination .ant-pagination-item-active a {
+  color: black;
+
+}

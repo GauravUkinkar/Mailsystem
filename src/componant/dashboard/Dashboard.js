@@ -39,7 +39,6 @@ const Dashboard = ({ getDomains }) => {
         `${process.env.REACT_APP_API}api/subdomain/addSubdomain`,
         subdomain
       );
-      console.log(response, ">>>>>>>> API Response");
       alert("Subdomain Added Successfully");
       window.location.reload();
       // Preserve `domainId` when resetting state
@@ -49,7 +48,7 @@ const Dashboard = ({ getDomains }) => {
         description: "",
       });
 
-      setIsModalVisible(false); // Close modal after successful submission
+      setIsModalVisible(false); 
     } catch (error) {
       console.log(error);
     }
@@ -282,6 +281,7 @@ const Dashboard = ({ getDomains }) => {
       handleMasterData(id || defaultId);
     }
   }, [getDomains]);
+  
 
   return (
     <>
@@ -291,9 +291,9 @@ const Dashboard = ({ getDomains }) => {
           <div className="top-section">
             <div className="domain-deatil-heading">
               <h3>Domain Details:</h3>
-              <span>
+              <Link to={`/add-domain?id=${masterData?.[0]?.domainId}`}>
                 <CiEdit />
-              </span>
+              </Link>
             </div>
             <div className="domain-details">
               <div className="detail-left">
