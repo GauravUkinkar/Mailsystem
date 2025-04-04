@@ -81,7 +81,7 @@ const Addmail = () => {
     if (Object.keys(validationErrors).length > 0) {
       return false;
     }
-    
+
     try {
       let response;
 
@@ -89,12 +89,12 @@ const Addmail = () => {
         response = await axios.put(
           `${process.env.REACT_APP_API}api/email/emailEdit?emailId=${id}`,
           emailadd
-        );        
+        );
       } else {
         response = await axios.post(
           `${process.env.REACT_APP_API}api/email/addEmail`,
           emailadd
-        );        
+        );
       }
 
       if (response.status === 200) {
@@ -113,6 +113,7 @@ const Addmail = () => {
       console.log(error);
     }
   };
+  
 
   return (
     <>

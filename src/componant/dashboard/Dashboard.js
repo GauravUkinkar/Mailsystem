@@ -282,7 +282,21 @@ const Dashboard = ({ getDomains }) => {
     }
   }, [getDomains]);
   
-
+  //-----------------Delete API ------------------------//
+  const deletedata = async (id) => {
+    if (window.confirm("Are you sure you want to delete this data?")) {
+      try {
+        const response = await axios.delete(
+          `${process.env.REACT_APP_API_URL}/home/delete/${id}`
+        );
+        toast.success("Data deleted successfully");
+        handleMasterData();
+      } catch (error) {
+        message.error(error);
+      }
+    }
+  };
+  //-------------------End Delete API-----------------//
   return (
     <>
       <div className="dashboard-parent parent">
