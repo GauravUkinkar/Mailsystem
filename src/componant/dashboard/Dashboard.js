@@ -135,9 +135,9 @@ const Dashboard = ({ getDomains }) => {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <a href="#">
-            <CiEdit />
-          </a>
+          <div className="edit-btn" onClick={showModal}>
+            <CiEdit  />
+          </div>
           <a href="#">
             <MdDeleteForever />
           </a>
@@ -254,11 +254,8 @@ const Dashboard = ({ getDomains }) => {
             <MdDeleteForever />
           </a>
         </Space>
-      ),
-      
+      ),  
       width: "5%",
-
-      
     },
    
 

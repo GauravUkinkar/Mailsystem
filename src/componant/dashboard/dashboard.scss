@@ -56,13 +56,11 @@
             font-size: 16px;
           }
 
-
-          .expiredate{
-
-            &.active{
-             span{
-              color: orangered;
-             }
+          .expiredate {
+            &.active {
+              span {
+                color: orangered;
+              }
             }
           }
         }
@@ -107,12 +105,22 @@
           width: 100%;
         }
       }
-
-      
     }
-    .middle-section{
-      .under-middle{
-        display: flex;justify-content: space-between;
+    .middle-section {
+      .under-middle {
+        display: flex;
+        justify-content: space-between;
+      }
+      .edit-btn {
+        font-size: 18px;
+        border: 1px solid rgba(0, 0, 0, 0.39);
+        border-radius: calc(var(--unit) / 2);
+        padding: calc(var(--unit) / 4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: black;
       }
     }
 
