@@ -247,7 +247,7 @@ const Dashboard = ({ getDomains }) => {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <Link to={`add-email?id=${masterData?.[0]?.domainId}`}>
+          <Link to={`add-email?id=${record.emailId}`}>
             <CiEdit />
           </Link>
           <a href="#" onClick={() => deletedata(record.emailId)}>
@@ -255,8 +255,13 @@ const Dashboard = ({ getDomains }) => {
           </a>
         </Space>
       ),
+      
       width: "5%",
+
+      
     },
+   
+
   ];
 
   //end email data
