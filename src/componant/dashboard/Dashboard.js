@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./dashboard.scss";
-import { Input, message, Modal, Space, Table } from "antd";
+import { Input, Modal, Space, Table } from "antd";
 import { CiEdit } from "react-icons/ci";
 import { MdDeleteForever } from "react-icons/md";
 import { SearchOutlined } from "@ant-design/icons";
@@ -293,7 +293,7 @@ const Dashboard = ({ getDomains }) => {
         toast.success("Data deleted successfully");
         handleMasterData();
       } catch (error) {
-        console.log(error);
+       console.log(error);
       }
     }
   };
