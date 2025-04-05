@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./dashboard.scss";
-import { Input, Modal, Space, Table } from "antd";
+import { Input, message, Modal, Space, Table } from "antd";
 import { CiEdit } from "react-icons/ci";
 import { MdDeleteForever } from "react-icons/md";
 import { SearchOutlined } from "@ant-design/icons";
 import axios from "axios";
 import { Link, useSearchParams } from "react-router-dom";
 import TextArea from "antd/es/input/TextArea";
+import { toast } from "react-toastify";
 
 const Dashboard = ({ getDomains }) => {
   const defaultId = getDomains[0]?.id;
@@ -249,7 +250,7 @@ const Dashboard = ({ getDomains }) => {
           <Link to={`add-email?id=${masterData?.[0]?.domainId}`}>
             <CiEdit />
           </Link>
-          <a href="#">
+          <a href="#" onClick={() => deletedata(record.emailId)}>
             <MdDeleteForever />
           </a>
         </Space>
@@ -287,12 +288,12 @@ const Dashboard = ({ getDomains }) => {
     if (window.confirm("Are you sure you want to delete this data?")) {
       try {
         const response = await axios.delete(
-          `${process.env.REACT_APP_API_URL}/home/delete/${id}`
+          `${process.env.REACT_APP_API}api/email/deletEmail?emailId=${id}`
         );
         toast.success("Data deleted successfully");
         handleMasterData();
       } catch (error) {
-        message.error(error);
+        console.log(error);
       }
     }
   };
