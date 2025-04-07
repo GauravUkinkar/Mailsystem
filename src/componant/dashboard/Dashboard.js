@@ -287,9 +287,13 @@ const Dashboard = ({ getDomains }) => {
   const deletedata = async (id) => {
     if (window.confirm("Are you sure you want to delete this data?")) {
       try {
-        const response = await axios.delete(
-          `${process.env.REACT_APP_API}api/email/deletEmail?emailId=${id}`
+         await axios.delete(
+          `${process.env.REACT_APP_API}api/email/deletEmail?emailId=${id}`, 
+
         );
+         await axios.delete(
+        `${process.env.REACT_APP_API}api/domain/deleteDomain?domainId=${id}`
+      );
         toast.success("Data deleted successfully");
         handleMasterData();
       } catch (error) {
@@ -306,9 +310,15 @@ const Dashboard = ({ getDomains }) => {
           <div className="top-section">
             <div className="domain-deatil-heading">
               <h3>Domain Details:</h3>
+              <div className="edit_delete">
               <Link to={`/add-domain?id=${masterData?.[0]?.domainId}`}>
                 <CiEdit />
               </Link>
+              <a href="#" onClick={() => deletedata(masterData?.[0]?.domainId)}>
+                <MdDeleteForever />
+              </a>
+              </div>
+             
             </div>
             <div className="domain-details">
               <div className="detail-left">
