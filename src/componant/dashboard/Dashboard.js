@@ -187,7 +187,7 @@ const Dashboard = ({ getDomains }) => {
           >
             <CiEdit />
           </div>
-          <div onClick={() => deleteSubDomain(record.subdomainId)}>
+          <div className="delete-btn" onClick={() => deleteSubDomain(record.subdomainId)}>
             <MdDeleteForever />
           </div>
         </Space>

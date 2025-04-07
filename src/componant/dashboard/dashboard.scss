@@ -112,7 +112,7 @@
         display: flex;
         justify-content: space-between;
       }
-      .edit-btn {
+      .edit-btn, .delete-btn {
         font-size: 18px;
         border: 1px solid rgba(0, 0, 0, 0.39);
         border-radius: calc(var(--unit) / 2);
