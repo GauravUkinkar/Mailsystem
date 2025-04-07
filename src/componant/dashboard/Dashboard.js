@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 
 const Dashboard = ({ getDomains }) => {
   const defaultId = getDomains[0]?.id;
-
+ 
   const [subdomain, setSubdomain] = useState({
     domainId: defaultId,
     subdomain: "",
@@ -293,9 +293,6 @@ const Dashboard = ({ getDomains }) => {
           `${process.env.REACT_APP_API}api/email/deletEmail?emailId=${id}`, 
 
         );
-         await axios.delete(
-        `${process.env.REACT_APP_API}api/domain/deleteDomain?domainId=${id}`
-      );
         toast.success("Data deleted successfully");
         handleMasterData();
       } catch (error) {
@@ -312,14 +309,12 @@ const Dashboard = ({ getDomains }) => {
           <div className="top-section">
             <div className="domain-deatil-heading">
               <h3>Domain Details:</h3>
-              <div className="edit_delete">
+         
               <Link to={`/add-domain?id=${masterData?.[0]?.domainId}`}>
                 <CiEdit />
               </Link>
-              <a href="#" onClick={() => deletedata(masterData?.[0]?.domainId)}>
-                <MdDeleteForever />
-              </a>
-              </div>
+            
+      
              
             </div>
             <div className="domain-details">
