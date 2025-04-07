@@ -94,7 +94,7 @@ function AddDomain({ getAllDomains }) {
       } else {
         response = await axios.post(
           `${process.env.REACT_APP_API}api/domain/addDomian`,
-          domainAdd 
+          domainAdd
         );
       }
       if (response.status === 200) {
@@ -102,7 +102,7 @@ function AddDomain({ getAllDomains }) {
       }
 
       alert(id ? "Domain Updated Succefully" : "Domain Added Succefully");
-      getAllDomains()
+      getAllDomains();
 
       setDomainAdd({
         Domain: "",
@@ -118,7 +118,13 @@ function AddDomain({ getAllDomains }) {
     }
   };
 
-  const domainWebsitesName = ["Milesweb","Mediastroke", "Hostinger", "GoDaddy", "BigRock"];
+  const domainWebsitesName = [
+    "Milesweb",
+    "Mediastroke",
+    "Hostinger",
+    "GoDaddy",
+    "BigRock",
+  ];
 
   return (
     <>
