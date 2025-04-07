@@ -5,13 +5,13 @@ import { CiEdit } from "react-icons/ci";
 import { MdDeleteForever } from "react-icons/md";
 import { SearchOutlined } from "@ant-design/icons";
 import axios from "axios";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import TextArea from "antd/es/input/TextArea";
 import { toast } from "react-toastify";
 
 const Dashboard = ({ getDomains }) => {
   const defaultId = getDomains[0]?.id;
- 
+
   const [subdomain, setSubdomain] = useState({
     domainId: defaultId,
     subdomain: "",
@@ -20,36 +20,82 @@ const Dashboard = ({ getDomains }) => {
 
   const [searchParams] = useSearchParams();
 
-  useEffect(() => {
-    const paramId = searchParams.get("id");
+  const navigate = useNavigate();
 
+  const paramId = searchParams.get("id");
+  useEffect(() => {
     setSubdomain((prev) => ({
       ...prev,
       domainId: Number(paramId || defaultId),
     }));
   }, [searchParams, defaultId]);
 
+  const handleSubdomainByID = async (id) => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API}api/subdomain/getsubdomainBYId?subdomainId=${id}`
+      );
+      setIsModalVisible(true);
+      navigate(`/?id=${paramId}&bId=${id}`);
+      setSubdomain({
+        subdomain: response.data.data[0].subdomain,
+        description: response.data.data[0].description,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleSubdomain = async () => {
-    console.log("button trigere");
+    let response;
+    const subDomainId = searchParams.get("bId");
     try {
       if (subdomain.subdomain === "" || subdomain.description === "") {
         alert("filter are not empty");
         return;
       }
-      const response = await axios.post(
-        `${process.env.REACT_APP_API}api/subdomain/addSubdomain`,
-        subdomain
+
+      if (subDomainId) {
+        response = await axios.put(
+          `${process.env.REACT_APP_API}api/subdomain/editSubdomain?subdomainId=${subDomainId}`,
+          subdomain
+        );
+      } else {
+        response = await axios.post(
+          `${process.env.REACT_APP_API}api/subdomain/addSubdomain`,
+          subdomain
+        );
+      }
+
+      alert(
+        paramId
+          ? "Subdomain Updated Successfully"
+          : "Subdomain Added Successfully"
       );
-      alert("Subdomain Added Successfully");
+      setIsModalVisible(false);
+      navigate(`/?id=${paramId}`);
       window.location.reload();
       // Preserve `domainId` when resetting state
       setSubdomain({
-        domainId: 0,
         subdomain: "",
         description: "",
       });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-      setIsModalVisible(false); 
+  const deleteSubDomain = async (id) => {
+    try {
+      const confirm = window.confirm("Are you sure want to delete ? ");
+
+      if (!confirm) return;
+
+      const response = await axios.delete(
+        `${process.env.REACT_APP_API}api/subdomain/deleteSubdomain?subdomainId=${id}`
+      );
+
+      window.location.reload()
     } catch (error) {
       console.log(error);
     }
@@ -135,12 +181,15 @@ const Dashboard = ({ getDomains }) => {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <div className="edit-btn" onClick={showModal}>
-            <CiEdit  />
+          <div
+            className="edit-btn"
+            onClick={() => handleSubdomainByID(record.subdomainId)}
+          >
+            <CiEdit />
           </div>
-          <a href="#">
+          <div onClick={() => deleteSubDomain(record.subdomainId)}>
             <MdDeleteForever />
-          </a>
+          </div>
         </Space>
       ),
       width: "5%",
@@ -254,11 +303,9 @@ const Dashboard = ({ getDomains }) => {
             <MdDeleteForever />
           </a>
         </Space>
-      ),  
+      ),
       width: "5%",
     },
-   
-
   ];
 
   //end email data
@@ -284,23 +331,23 @@ const Dashboard = ({ getDomains }) => {
       handleMasterData(id || defaultId);
     }
   }, [getDomains]);
-  
+
   //-----------------Delete API ------------------------//
   const deletedata = async (id) => {
     if (window.confirm("Are you sure you want to delete this data?")) {
       try {
-         await axios.delete(
-          `${process.env.REACT_APP_API}api/email/deletEmail?emailId=${id}`, 
-
+        const response = await axios.delete(
+          `${process.env.REACT_APP_API}api/email/deletEmail?emailId=${id}`
         );
         toast.success("Data deleted successfully");
         handleMasterData();
       } catch (error) {
-       console.log(error);
+        console.log(error);
       }
     }
   };
   //-------------------End Delete API-----------------//
+
   return (
     <>
       <div className="dashboard-parent parent">
@@ -309,14 +356,9 @@ const Dashboard = ({ getDomains }) => {
           <div className="top-section">
             <div className="domain-deatil-heading">
               <h3>Domain Details:</h3>
-         
               <Link to={`/add-domain?id=${masterData?.[0]?.domainId}`}>
                 <CiEdit />
               </Link>
-             
-            
-      
-             
             </div>
             <div className="domain-details">
               <div className="detail-left">
@@ -331,7 +373,13 @@ const Dashboard = ({ getDomains }) => {
                   Purchase Date :{" "}
                   <span>{masterData?.[0]?.purchaseDate.split("T")[0]}</span>{" "}
                 </p>
-                <p  className={masterData?.[0]?.expiryStatus === 1 ? "active  expiredate" : ""}>
+                <p
+                  className={
+                    masterData?.[0]?.expiryStatus === 1
+                      ? "active  expiredate"
+                      : ""
+                  }
+                >
                   Expiry Date :{" "}
                   <span>{masterData?.[0]?.expiryDate.split("T")[0]}</span>{" "}
                 </p>
