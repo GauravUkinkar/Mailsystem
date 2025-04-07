@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "./addwebsite.scss";
 import axios from "axios";
+import { useSearchParams, useNavigate } from "react-router-dom";
 
 const AddWebsite = ({ getDomains }) => {
   const [error, setError] = useState({});
+  const [searchParams] = useSearchParams();
+  const id = searchParams.get("id");
+  const navigate = useNavigate();
+
 
   const handleError = (valuesS) => {
     let error = {};
@@ -22,7 +27,6 @@ const AddWebsite = ({ getDomains }) => {
     websiteUrl: "",
     websitePlatfrom: "",
     username: "",
-
     password: "",
   });
 
@@ -35,6 +39,28 @@ const AddWebsite = ({ getDomains }) => {
     }
   }, [getDomains]);
 
+  const handleWebsiteById = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API}api/website/getWebsiteById?websiteId=${id}`
+      );
+
+      setWebSite({
+        domainId: response.data.data[0].domainId,
+        websiteUrl: response.data.data[0].websiteUrl,
+        websitePlatfrom: response.data.data[0].websitePlatfrom,
+        username: response.data.data[0].username,
+        password: response.data.data[0].password,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    handleWebsiteById();
+  }, []);
+
   const handleWebsite = async (e) => {
     e.preventDefault();
 
@@ -45,15 +71,31 @@ const AddWebsite = ({ getDomains }) => {
     if (Object.keys(validationErrors).length > 0) {
       return false;
     }
-    try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_API}api/website/addWebsite`,
-        webSite
-      );
 
-      alert("Website Added Succefully");
+    try {
+      let response;
+
+      if (id) {
+        response = await axios.put(
+          `${process.env.REACT_APP_API}api/website/editWebsite?websiteId=${id}`,
+          webSite
+        );
+      } else {
+        response = await axios.post(
+          `${process.env.REACT_APP_API}api/website/addWebsite`,
+          webSite
+        );
+      }
+
+      if(response.status === 200){
+        navigate('/');
+      }
+      window.location.reload();
+
+      alert(id ? "Website Updated Succefully" : "Website Added Succefully");
 
       setWebSite({
+
         websiteUrl: "",
         websitePlatfrom: "",
         username: "",

@@ -95,7 +95,23 @@ const Dashboard = ({ getDomains }) => {
         `${process.env.REACT_APP_API}api/subdomain/deleteSubdomain?subdomainId=${id}`
       );
 
-      window.location.reload()
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const deleteWebsite = async (id) => {
+    try {
+      const confirm = window.confirm("Are you sure want to delete ? ");
+
+      if (!confirm) return;
+
+      const response = await axios.delete(
+        `${process.env.REACT_APP_API}api/website/deleteWebsite?websiteId=${id}`
+      );
+
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
@@ -187,7 +203,10 @@ const Dashboard = ({ getDomains }) => {
           >
             <CiEdit />
           </div>
-          <div className="delete-btn" onClick={() => deleteSubDomain(record.subdomainId)}>
+          <div
+            className="delete-btn"
+            onClick={() => deleteSubDomain(record.subdomainId)}
+          >
             <MdDeleteForever />
           </div>
         </Space>
@@ -240,12 +259,15 @@ const Dashboard = ({ getDomains }) => {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <a href="#">
+          <Link to={`add-website?id=${record.websiteId}`}>
             <CiEdit />
-          </a>
-          <a href="#">
+          </Link>
+          <div
+            className="delete-btn"
+            onClick={() => deleteWebsite(record.websiteId)}
+          >
             <MdDeleteForever />
-          </a>
+          </div>
         </Space>
       ),
       width: "5%",
