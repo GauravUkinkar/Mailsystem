@@ -10,7 +10,6 @@
     flex-direction: column;
     gap: calc(var(--unit));
 
-
     .main-wrapper {
       padding: 20px;
       background: white;
@@ -20,35 +19,47 @@
       width: 100%;
       gap: calc(var(--unit));
 
-
       .notify-deatil-heading {
       }
 
       .notify-details {
         display: flex;
-        flex-direction: column;
-        gap: calc(var(--unit) / 2);
+        gap: calc(var(--unit) * 2);
+        align-items: flex-start;
+        justify-content: flex-start;
 
-        .one{
-            display: flex;
-            gap: calc(var(--unit) * 5);
+        .one {
+          display: flex;
+          gap: calc(var(--unit) / 2);
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: flex-start;
         }
 
-        .two{
-            display: flex;
-            gap: calc(var(--unit) * 5);
-
+        .two {
+          display: flex;
+          gap: calc(var(--unit) / 2);
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: flex-start;
         }
         p {
           color: black;
           font-weight: 600;
           font-size: 16px;
-        }
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: calc(var(--unit) / 2);
 
-        span {
-          color: rgb(66, 66, 66);
-          font-weight: 400;
-          font-size: 16px;
+          span {
+            color: rgb(66, 66, 66);
+            font-weight: 400;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
         }
 
         .expiredate {
