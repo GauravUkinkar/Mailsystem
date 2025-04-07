@@ -118,7 +118,7 @@ function AddDomain({ getAllDomains }) {
     }
   };
 
-  const domainWebsitesName = ["Milesweb", "Hostinger", "GoDaddy", "BigRock"];
+  const domainWebsitesName = ["Milesweb","Mediastroke", "Hostinger", "GoDaddy", "BigRock"];
 
   return (
     <>

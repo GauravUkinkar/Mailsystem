@@ -53,10 +53,6 @@ const Sidebar = ({ onLogout, getDomains }) => {
       );
   
       alert("Domain Deleted Successfully");
-  
-      // ✅ get new domains after deletion
-      // update state
-    
     
       if (defaultId !== idFromParams) {
         navigate("/")

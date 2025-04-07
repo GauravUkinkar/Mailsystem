@@ -3,12 +3,13 @@
   position: fixed;
   left: 0;
   top: 60px;
-  width: 250px;
+  width: 270px;
   background: var(--black);
   height: calc(100vh - 60px);
   align-items: flex-start;
   flex-direction: column;
   justify-content: space-between;
+  overflow-y: auto;
 
   .list {
     padding: 10px;

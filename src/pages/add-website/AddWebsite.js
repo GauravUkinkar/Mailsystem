@@ -51,7 +51,7 @@ const AddWebsite = ({ getDomains }) => {
         webSite
       );
 
-      alert("Domain Added Succefully");
+      alert("Website Added Succefully");
 
       setWebSite({
         websiteUrl: "",
