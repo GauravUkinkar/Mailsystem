@@ -374,7 +374,7 @@ const Dashboard = ({ getDomains }) => {
     }
   };
   //-------------------End Delete API-----------------//
-
+  const options = { day: "2-digit", month: "short", year: "numeric" };
   return (
     <>
       <div className="dashboard-parent parent">
@@ -413,18 +413,50 @@ const Dashboard = ({ getDomains }) => {
                   </p>
                 </div>
               </div>
-
-              <div className="login-detail">
+            <div className="domain-details">
+              <div className="detail-left">
                 <p>
-                  Login URL : <span>{masterData?.[0]?.platformUrl}</span>
+                  Domain Name : <span>{masterData?.[0]?.Domain}</span>{" "}
                 </p>
                 <p>
-                  User Name : <span>{masterData?.[0]?.username}</span>
+                  Purchase Platform :{" "}
+                  <span>{masterData?.[0]?.purchasePlatform}</span>{" "}
                 </p>
                 <p>
-                  Password : <span>{masterData?.[0]?.password}</span>
+                  Purchase Date :{" "}
+                  <span>
+                    {new Date(
+                      masterData?.[0]?.purchaseDate.split("T")[0] || null
+                    ).toLocaleDateString("en-GB", options)}
+                  </span>{" "}
+                </p>
+                <p
+                  className={
+                    masterData?.[0]?.expiryStatus === 1
+                      ? "active  expiredate"
+                      : ""
+                  }
+                >
+                  Expiry Date :{" "}
+                  <span>
+                    {new Date( 
+                      masterData?.[0]?.expiryDate.split("T")[0]  || null
+                    ).toLocaleDateString("en-GB", options) }
+                  </span>{" "}
                 </p>
               </div>
+            </div>
+
+            <div className="login-detail">
+              <p>
+                Login URL : <span>{masterData?.[0]?.platformUrl}</span>
+              </p>
+              <p>
+                User Name : <span>{masterData?.[0]?.username}</span>
+              </p>
+              <p>
+                Password : <span>{masterData?.[0]?.password}</span>
+              </p>
             </div>
           </div>
 
