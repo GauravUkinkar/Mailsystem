@@ -35,73 +35,99 @@
           cursor: pointer;
           color: black;
         }
-
       }
-     .content{
-      display: flex;
+      //  .content{
+      //   display: flex;
 
-      .domain-details {
-        
-        .detail-left {
+      //   .domain-details {
+
+      //     .detail-left {
+      //       display: flex;
+      //     gap: 10px;
+      //     align-items: flex-start;
+      //     justify-content: flex-start;
+      //     flex-direction: column;
+
+      //       p {
+      //         color: rgb(66, 66, 66);
+
+      //         font-weight: 400;
+      //         font-size: 16px;
+      //         background: rgb(230, 230, 230);
+      //         padding: 10px;
+      //         border-radius: 5px;
+      //       }
+
+      //       span {
+      //         color: black;
+      //         font-weight: 600;
+      //         font-size: 16px;
+      //       }
+
+      //       .expiredate {
+      //         &.active {
+      //           span {
+      //             color: orangered;
+      //           }
+      //         }
+      //       }
+      //     }
+      //   }
+
+      //   .login-detail {
+      //     display: flex;
+      //     gap: 10px;
+      //     align-items: flex-start;
+      //     justify-content: flex-start;
+      //     flex-direction: column;
+
+      //     p {
+      //       color: rgb(66, 66, 66);
+
+      //       font-weight: 400;
+      //       font-size: 16px;
+      //       background: rgb(230, 230, 230);
+      //       padding: 10px;
+      //       border-radius: 5px;
+      //     }
+
+      //     span {
+      //       color: black;
+      //         font-weight: 600;
+      //         font-size: 16px;
+      //     }
+      //   }
+      //  }
+      .list {
+        ul {
           display: flex;
-        gap: 10px;
-        align-items: flex-start;
-        justify-content: flex-start;
-        flex-direction: column;
-
-          
-
-          p {
+          gap: 10px;
+          flex-wrap: wrap;
+          li {
             color: rgb(66, 66, 66);
-           
+
             font-weight: 400;
             font-size: 16px;
             background: rgb(230, 230, 230);
             padding: 10px;
             border-radius: 5px;
-          }
-
-          span {
-            color: black;
-            font-weight: 600;
-            font-size: 16px;
-          }
-
-          .expiredate {
-            &.active {
-              span {
-                color: orangered;
+            list-style-type: none;
+            span {
+              color: black;
+              font-weight: 600;
+              font-size: 16px;
+            }
+            .expiredate {
+              &.active {
+                span {
+                  color: orangered;
+                }
               }
             }
+            
           }
         }
       }
-
-      .login-detail {
-        display: flex;
-        gap: 10px;
-        align-items: flex-start;
-        justify-content: flex-start;
-        flex-direction: column;
-
-
-        p {
-          color: rgb(66, 66, 66);
-           
-          font-weight: 400;
-          font-size: 16px;
-          background: rgb(230, 230, 230);
-          padding: 10px;
-          border-radius: 5px;
-        }
-
-        span {
-          color: black;
-            font-weight: 600;
-            font-size: 16px;
-        }
-      }
-     }
     }
 
     //css for subdomain list
@@ -129,7 +155,6 @@
         display: flex;
         justify-content: space-between;
       }
-      
     }
 
     .fourth-section {
@@ -140,7 +165,8 @@
       }
     }
 
-    .edit-btn, .delete-btn {
+    .edit-btn,
+    .delete-btn {
       font-size: 18px;
       border: 1px solid rgba(0, 0, 0, 0.39);
       border-radius: calc(var(--unit) / 2);

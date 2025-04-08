@@ -33,7 +33,7 @@ const Dashboard = ({ getDomains }) => {
   const handleSubdomainByID = async (id) => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API}api/subdomain/getsubdomainBYId?subdomainId=${id}`
+        ` ${process.env.REACT_APP_API}api/subdomain/getsubdomainBYId?subdomainId=${id}`
       );
       setIsModalVisible(true);
       navigate(`/?id=${paramId}&bId=${id}`);
@@ -57,12 +57,12 @@ const Dashboard = ({ getDomains }) => {
 
       if (subDomainId) {
         response = await axios.put(
-          `${process.env.REACT_APP_API}api/subdomain/editSubdomain?subdomainId=${subDomainId}`,
+          ` ${process.env.REACT_APP_API}api/subdomain/editSubdomain?subdomainId=${subDomainId}`,
           subdomain
         );
       } else {
         response = await axios.post(
-          `${process.env.REACT_APP_API}api/subdomain/addSubdomain`,
+          ` ${process.env.REACT_APP_API}api/subdomain/addSubdomain`,
           subdomain
         );
       }
@@ -75,7 +75,7 @@ const Dashboard = ({ getDomains }) => {
       setIsModalVisible(false);
       navigate(`/?id=${paramId}`);
       window.location.reload();
-      // Preserve `domainId` when resetting state
+      // Preserve domainId when resetting state
       setSubdomain({
         subdomain: "",
         description: "",
@@ -92,7 +92,7 @@ const Dashboard = ({ getDomains }) => {
       if (!confirm) return;
 
       const response = await axios.delete(
-        `${process.env.REACT_APP_API}api/subdomain/deleteSubdomain?subdomainId=${id}`
+        ` ${process.env.REACT_APP_API}api/subdomain/deleteSubdomain?subdomainId=${id}`
       );
 
       window.location.reload();
@@ -338,7 +338,7 @@ const Dashboard = ({ getDomains }) => {
   const handleMasterData = async (id) => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API}api/domain/getMasterDataId?domainId=${id}`
+        ` ${process.env.REACT_APP_API}api/domain/getMasterDataId?domainId=${id}`
       );
 
       setMasterData(response.data.data);
@@ -380,39 +380,13 @@ const Dashboard = ({ getDomains }) => {
       <div className="dashboard-parent parent">
         <div className="dashboard-cont cont">
           {/* //----------------Top Section For All Details Related Domain---------------// */}
-          <div className="top-section">
+          {/* <div className="top-section">
             <div className="domain-deatil-heading">
               <h3>Domain Details:</h3>
               <Link to={`/add-domain?id=${masterData?.[0]?.domainId}`}>
                 <CiEdit />
               </Link>
             </div>
-            <div className="content">
-              <div className="domain-details">
-                <div className="detail-left">
-                  <p>
-                    Domain Name : <span>{masterData?.[0]?.Domain}</span>{" "}
-                  </p>
-                  <p>
-                    Purchase Platform :{" "}
-                    <span>{masterData?.[0]?.purchasePlatform}</span>{" "}
-                  </p>
-                  <p>
-                    Purchase Date :{" "}
-                    <span>{masterData?.[0]?.purchaseDate.split("T")[0]}</span>{" "}
-                  </p>
-                  <p
-                    className={
-                      masterData?.[0]?.expiryStatus === 1
-                        ? "active  expiredate"
-                        : ""
-                    }
-                  >
-                    Expiry Date :{" "}
-                    <span>{masterData?.[0]?.expiryDate.split("T")[0]}</span>{" "}
-                  </p>
-                </div>
-              </div>
             <div className="domain-details">
               <div className="detail-left">
                 <p>
@@ -458,8 +432,71 @@ const Dashboard = ({ getDomains }) => {
                 Password : <span>{masterData?.[0]?.password}</span>
               </p>
             </div>
-          </div>
+          </div> */}
 
+          <div className="top-section">
+            <div className="domain-deatil-heading">
+              <h3>Domain Details:</h3>
+              <Link to={`/add-domain?id=${masterData?.[0]?.domainId}`}>
+                <CiEdit />
+              </Link>
+            </div>
+            <div className="list">
+              <ul>
+                <li>
+                  Domain Name: <span>{masterData?.[0]?.Domain}</span>
+                </li>
+                <li>
+                  Purchase Platform:{" "}
+                  <span>{masterData?.[0]?.purchasePlatform}</span>
+                </li>
+                <li>
+                  Purchase Date:{" "}
+                  <span>
+                    {" "}
+                    {new Date(
+                      masterData?.[0]?.purchaseDate.split("T")[0] || null
+                    ).toLocaleDateString("en-GB", options)}
+                  </span>
+                </li>
+                <li
+                  className={
+                    masterData?.[0]?.expiryStatus === 1
+                      ? "active  expiredate"
+                      : ""
+                  }
+                >
+                  Expiry Date :{" "}
+                  <span>
+                    {" "}
+                    {new Date( 
+                      masterData?.[0]?.expiryDate.split("T")[0]  || null
+                    ).toLocaleDateString("en-GB", options) }
+                  </span>
+                </li>
+                <li>
+                  {" "}
+                  Login URL:{" "}
+                  <span>
+                    {" "}
+                    <a
+                      href={masterData?.[0]?.platformUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {masterData?.[0]?.platformUrl}
+                    </a>
+                  </span>
+                </li>
+                <li>
+                  User Name: <span>{masterData?.[0]?.username}</span>
+                </li>
+                <li>
+                  Password : <span>{masterData?.[0]?.password}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
           {/* //----------------Details for all created subdomain -------------------// */}
           <div className="middle-section">
             <div className="under-middle">
