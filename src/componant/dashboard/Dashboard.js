@@ -374,7 +374,7 @@ const Dashboard = ({ getDomains }) => {
     }
   };
   //-------------------End Delete API-----------------//
-
+  const options = { day: "2-digit", month: "short", year: "numeric" };
   return (
     <>
       <div className="dashboard-parent parent">
@@ -398,7 +398,11 @@ const Dashboard = ({ getDomains }) => {
                 </p>
                 <p>
                   Purchase Date :{" "}
-                  <span>{masterData?.[0]?.purchaseDate.split("T")[0]}</span>{" "}
+                  <span>
+                    {new Date(
+                      masterData?.[0]?.purchaseDate.split("T")[0] || null
+                    ).toLocaleDateString("en-GB", options)}
+                  </span>{" "}
                 </p>
                 <p
                   className={
@@ -408,7 +412,11 @@ const Dashboard = ({ getDomains }) => {
                   }
                 >
                   Expiry Date :{" "}
-                  <span>{masterData?.[0]?.expiryDate.split("T")[0]}</span>{" "}
+                  <span>
+                    {new Date( 
+                      masterData?.[0]?.expiryDate.split("T")[0]  || null
+                    ).toLocaleDateString("en-GB", options) }
+                  </span>{" "}
                 </p>
               </div>
             </div>
