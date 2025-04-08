@@ -387,42 +387,44 @@ const Dashboard = ({ getDomains }) => {
                 <CiEdit />
               </Link>
             </div>
-            <div className="domain-details">
-              <div className="detail-left">
+            <div className="content">
+              <div className="domain-details">
+                <div className="detail-left">
+                  <p>
+                    Domain Name : <span>{masterData?.[0]?.Domain}</span>{" "}
+                  </p>
+                  <p>
+                    Purchase Platform :{" "}
+                    <span>{masterData?.[0]?.purchasePlatform}</span>{" "}
+                  </p>
+                  <p>
+                    Purchase Date :{" "}
+                    <span>{masterData?.[0]?.purchaseDate.split("T")[0]}</span>{" "}
+                  </p>
+                  <p
+                    className={
+                      masterData?.[0]?.expiryStatus === 1
+                        ? "active  expiredate"
+                        : ""
+                    }
+                  >
+                    Expiry Date :{" "}
+                    <span>{masterData?.[0]?.expiryDate.split("T")[0]}</span>{" "}
+                  </p>
+                </div>
+              </div>
+
+              <div className="login-detail">
                 <p>
-                  Domain Name : <span>{masterData?.[0]?.Domain}</span>{" "}
+                  Login URL : <span>{masterData?.[0]?.platformUrl}</span>
                 </p>
                 <p>
-                  Purchase Platform :{" "}
-                  <span>{masterData?.[0]?.purchasePlatform}</span>{" "}
+                  User Name : <span>{masterData?.[0]?.username}</span>
                 </p>
                 <p>
-                  Purchase Date :{" "}
-                  <span>{masterData?.[0]?.purchaseDate.split("T")[0]}</span>{" "}
-                </p>
-                <p
-                  className={
-                    masterData?.[0]?.expiryStatus === 1
-                      ? "active  expiredate"
-                      : ""
-                  }
-                >
-                  Expiry Date :{" "}
-                  <span>{masterData?.[0]?.expiryDate.split("T")[0]}</span>{" "}
+                  Password : <span>{masterData?.[0]?.password}</span>
                 </p>
               </div>
-            </div>
-
-            <div className="login-detail">
-              <p>
-                Login URL : <span>{masterData?.[0]?.platformUrl}</span>
-              </p>
-              <p>
-                User Name : <span>{masterData?.[0]?.username}</span>
-              </p>
-              <p>
-                Password : <span>{masterData?.[0]?.password}</span>
-              </p>
             </div>
           </div>
 

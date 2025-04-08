@@ -73,6 +73,9 @@ function AddDomain({ getAllDomains }) {
     getDataById();
   }, []);
 
+
+ 
+
   const handleAddDomain = async (e) => {
     e.preventDefault();
 
