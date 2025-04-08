@@ -321,9 +321,12 @@ const Dashboard = ({ getDomains }) => {
           <Link to={`add-email?id=${record.emailId}`}>
             <CiEdit />
           </Link>
-          <a href="#" onClick={() => deletedata(record.emailId)}>
+          <div
+            className="delete-btn"
+            onClick={() => deletedata(record.emailId)}
+          >
             <MdDeleteForever />
-          </a>
+          </div>
         </Space>
       ),
       width: "5%",
@@ -361,6 +364,8 @@ const Dashboard = ({ getDomains }) => {
         const response = await axios.delete(
           `${process.env.REACT_APP_API}api/email/deletEmail?emailId=${id}`
         );
+        window.location.reload();
+
         toast.success("Data deleted successfully");
         handleMasterData();
       } catch (error) {
