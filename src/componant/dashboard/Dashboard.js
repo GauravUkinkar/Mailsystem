@@ -8,8 +8,14 @@ import axios from "axios";
 import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import TextArea from "antd/es/input/TextArea";
 import { toast } from "react-toastify";
+import { BiHide, BiShow } from "react-icons/bi";
 
 const Dashboard = ({ getDomains }) => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePassword = () => {
+    setShowPassword((prev) => !prev);
+  };
   const defaultId = getDomains[0]?.id;
 
   const [subdomain, setSubdomain] = useState({
@@ -410,7 +416,7 @@ const Dashboard = ({ getDomains }) => {
                     </a>
                   </span>
                 </li>
-                
+
                 <li>
                   Purchase Platform:{" "}
                   <span>{masterData?.[0]?.purchasePlatform}</span>
@@ -457,7 +463,13 @@ const Dashboard = ({ getDomains }) => {
                   User Name: <span>{masterData?.[0]?.username}</span>
                 </li>
                 <li>
-                  Password : <span>{masterData?.[0]?.password}</span>
+                  Password :
+                  <span className="new-password">
+                    {showPassword ? masterData?.[0]?.password : "XXXXXXXXXXXX"}
+                  </span>
+                  <div className="eye-btn" onClick={togglePassword}>
+                    {showPassword ? <BiHide size={16} /> : <BiShow size={16} />}
+                  </div>
                 </li>
               </ul>
             </div>

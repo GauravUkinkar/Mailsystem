@@ -105,17 +105,29 @@
           flex-wrap: wrap;
           li {
             color: rgb(66, 66, 66);
-
+display: flex;
             font-weight: 400;
             font-size: 16px;
             background: rgb(230, 230, 230);
             padding: 10px;
             border-radius: 5px;
             list-style-type: none;
+
             span {
               color: black;
               font-weight: 600;
               font-size: 16px;
+            }
+            .new-password {
+              margin-left: 10px;
+            }
+            .eye-btn {
+              margin-left: 10px;
+              border-radius: 50%;
+              cursor: pointer;
+              display: flex;align-items: center;
+              width:fit-content
+
             }
             .expiredate {
               &.active {
@@ -124,7 +136,6 @@
                 }
               }
             }
-            
           }
         }
       }
