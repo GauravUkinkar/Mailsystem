@@ -184,6 +184,11 @@ const Dashboard = ({ getDomains }) => {
       key: "subdomain",
       width: "20%",
       ...getColumnSearchProps("subdomain"),
+      render: (text) => (
+        <a href={`https://${text}`} target="_blank" rel="noopener noreferrer">
+          {text}
+        </a>
+      ),
     },
     {
       title: "Description",
@@ -232,6 +237,11 @@ const Dashboard = ({ getDomains }) => {
       key: "websiteUrl",
       width: "20%",
       ...getColumnSearchProps("websiteUrl"),
+      render: (text) => (
+        <a href={`${text}`} target="_blank" rel="noopener noreferrer">
+          {text}
+        </a>
+      ),
     },
     {
       title: "Website Platform",
@@ -379,61 +389,6 @@ const Dashboard = ({ getDomains }) => {
     <>
       <div className="dashboard-parent parent">
         <div className="dashboard-cont cont">
-          {/* //----------------Top Section For All Details Related Domain---------------// */}
-          {/* <div className="top-section">
-            <div className="domain-deatil-heading">
-              <h3>Domain Details:</h3>
-              <Link to={`/add-domain?id=${masterData?.[0]?.domainId}`}>
-                <CiEdit />
-              </Link>
-            </div>
-            <div className="domain-details">
-              <div className="detail-left">
-                <p>
-                  Domain Name : <span>{masterData?.[0]?.Domain}</span>{" "}
-                </p>
-                <p>
-                  Purchase Platform :{" "}
-                  <span>{masterData?.[0]?.purchasePlatform}</span>{" "}
-                </p>
-                <p>
-                  Purchase Date :{" "}
-                  <span>
-                    {new Date(
-                      masterData?.[0]?.purchaseDate.split("T")[0] || null
-                    ).toLocaleDateString("en-GB", options)}
-                  </span>{" "}
-                </p>
-                <p
-                  className={
-                    masterData?.[0]?.expiryStatus === 1
-                      ? "active  expiredate"
-                      : ""
-                  }
-                >
-                  Expiry Date :{" "}
-                  <span>
-                    {new Date( 
-                      masterData?.[0]?.expiryDate.split("T")[0]  || null
-                    ).toLocaleDateString("en-GB", options) }
-                  </span>{" "}
-                </p>
-              </div>
-            </div>
-
-            <div className="login-detail">
-              <p>
-                Login URL : <span>{masterData?.[0]?.platformUrl}</span>
-              </p>
-              <p>
-                User Name : <span>{masterData?.[0]?.username}</span>
-              </p>
-              <p>
-                Password : <span>{masterData?.[0]?.password}</span>
-              </p>
-            </div>
-          </div> */}
-
           <div className="top-section">
             <div className="domain-deatil-heading">
               <h3>Domain Details:</h3>
@@ -444,8 +399,18 @@ const Dashboard = ({ getDomains }) => {
             <div className="list">
               <ul>
                 <li>
-                  Domain Name: <span>{masterData?.[0]?.Domain}</span>
+                  Domain Name:{" "}
+                  <span>
+                    <a
+                      href={`https://${masterData?.[0]?.Domain}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {masterData?.[0]?.Domain}
+                    </a>
+                  </span>
                 </li>
+                
                 <li>
                   Purchase Platform:{" "}
                   <span>{masterData?.[0]?.purchasePlatform}</span>
@@ -469,9 +434,9 @@ const Dashboard = ({ getDomains }) => {
                   Expiry Date :{" "}
                   <span>
                     {" "}
-                    {new Date( 
-                      masterData?.[0]?.expiryDate.split("T")[0]  || null
-                    ).toLocaleDateString("en-GB", options) }
+                    {new Date(
+                      masterData?.[0]?.expiryDate.split("T")[0] || null
+                    ).toLocaleDateString("en-GB", options)}
                   </span>
                 </li>
                 <li>
