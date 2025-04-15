@@ -7,6 +7,7 @@ const Addmail = () => {
   const [error, setError] = useState({});
 
   const navigate = useNavigate();
+  
   const handleError = (values) => {
     let error = {};
     if (!values.email) {
@@ -21,6 +22,9 @@ const Addmail = () => {
     if (!values.password) {
       error.password = "Please Enter Email Password";
     }
+    if (!values.primaryTag) {
+      error.primaryTag = "Please Enter Primary Tag";
+    }
     return error;
   };
   //-------------------------------//
@@ -33,6 +37,7 @@ const Addmail = () => {
     domainId: "",
     username: "",
     password: "",
+    primaryTag: false,
   });
 
   const handleEmailByid = async () => {
@@ -47,7 +52,10 @@ const Addmail = () => {
         platform: response.data.data[0].platform,
         username: response.data.data[0].username,
         password: response.data.data[0].password,
+        primaryTag: response.data.data[0].primaryTag,
       });
+
+      console.log(response.data.data[0], "response data");
     } catch (error) {
       console.log(error);
     }
@@ -107,12 +115,12 @@ const Addmail = () => {
         domainId: "",
         username: "",
         password: "",
+        primaryTag: "",
       });
     } catch (error) {
       console.log(error);
     }
   };
-  
 
   return (
     <>
@@ -130,6 +138,31 @@ const Addmail = () => {
                 }
               />
             </label>
+            <label>
+              <p>Primary Mail</p>
+              <select
+                value={emailadd.primaryTag.toString()} // convert boolean to string
+                onChange={(e) =>
+                  setEmailAdd({
+                    ...emailadd,
+                    primaryTag: e.target.value === "true", // convert string to boolean
+                  })
+                }
+                className={error.primaryTag ? "error-border" : ""}
+              >
+                <option value="">Select</option>
+                <option value="true">True</option>
+                <option value="false">False</option>
+              </select>
+            </label>
+
+            {error.primaryTag && (
+              <span className="error">{error.primaryTag}</span>
+            )}
+            {error.primaryTag && (
+              <span className="error">{error.primaryTag}</span>
+            )}
+
             <label>
               <p>Mail Platform</p>
               <input

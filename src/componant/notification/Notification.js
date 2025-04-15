@@ -19,6 +19,7 @@ function Notification() {
   useEffect(() => {
     handleNotification();
   }, []);
+  const options = { day: "2-digit", month: "short", year: "numeric" };
 
   return (
     <>
@@ -40,12 +41,16 @@ function Notification() {
                 </div>
                 <div class="two">
                 <p>
-                  Purchase Date : <span>{item.purchaseDate.split("T")[0]}</span>
+                  Purchase Date : <span>{new Date(
+                      item.purchaseDate.split("T")[0] || null
+                    ).toLocaleDateString("en-GB", options)}</span>
                 </p>
                 <p
                   className={item.expiryStatus === 1 ? "active expiredate" : ""}
                 >
-                  Expiry Date : <span>{item.expiryDate.split("T")[0]}</span>
+                  Expiry Date : <span>{new Date(
+                      item.expiryDate.split("T")[0] || null
+                    ).toLocaleDateString("en-GB", options)}</span>
                 </p>
                 </div>
               </div>

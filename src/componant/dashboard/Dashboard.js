@@ -307,6 +307,24 @@ const Dashboard = ({ getDomains }) => {
       key: "email",
       width: "20%",
       ...getColumnSearchProps("email"),
+      render: (text, record) => (
+        <div>
+          <div>{text}</div>
+          {record.parimaryTag && (
+            <span style={{ 
+              backgroundColor: "green", 
+              color: "#fff", 
+              fontSize: "12px", 
+              padding: "2px 6px", 
+              borderRadius: "4px", 
+              marginTop: "4px", 
+              display: "inline-block" 
+            }}>
+              Primary
+            </span>
+          )}
+        </div>
+      )
     },
     {
       title: "Mail Platform",
@@ -328,6 +346,7 @@ const Dashboard = ({ getDomains }) => {
       key: "password",
       width: "30%",
       ...getColumnSearchProps("password"),
+      
     },
     {
       title: "Action",
@@ -358,6 +377,7 @@ const Dashboard = ({ getDomains }) => {
       );
 
       setMasterData(response.data.data);
+      console.log(response.data.data, "master data");
     } catch (error) {
       console.log(error);
     }
@@ -524,6 +544,8 @@ const Dashboard = ({ getDomains }) => {
           </div>
         </div>
       </div>
+
+      {/* //subdomain modal  */}
       <Modal
         title="Add Subdomain"
         visible={isModalVisible}
