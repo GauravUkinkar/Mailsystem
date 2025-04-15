@@ -9,6 +9,7 @@ import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import TextArea from "antd/es/input/TextArea";
 import { toast } from "react-toastify";
 import { BiHide, BiShow } from "react-icons/bi";
+import { BsStopBtn } from "react-icons/bs";
 
 const Dashboard = ({ getDomains }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -203,6 +204,7 @@ const Dashboard = ({ getDomains }) => {
       width: "70%",
       ...getColumnSearchProps("description"),
     },
+
     {
       title: "Action",
       key: "action",
@@ -310,7 +312,7 @@ const Dashboard = ({ getDomains }) => {
       render: (text, record) => (
         <div>
           <div>{text}</div>
-          {record.parimaryTag && (
+          {/* {record.parimaryTag === 1 && (
             <span style={{ 
               backgroundColor: "green", 
               color: "#fff", 
@@ -322,9 +324,9 @@ const Dashboard = ({ getDomains }) => {
             }}>
               Primary
             </span>
-          )}
+          )} */}
         </div>
-      )
+      ),
     },
     {
       title: "Mail Platform",
@@ -344,9 +346,8 @@ const Dashboard = ({ getDomains }) => {
       title: "Mail Password",
       dataIndex: "password",
       key: "password",
-      width: "30%",
+      width: "20%",
       ...getColumnSearchProps("password"),
-      
     },
     {
       title: "Action",
@@ -361,6 +362,29 @@ const Dashboard = ({ getDomains }) => {
             onClick={() => deletedata(record.emailId)}
           >
             <MdDeleteForever />
+          </div>
+        </Space>
+      ),
+      width: "5%",
+    },
+    {
+      title: "Tag",
+      key: "action",
+      render: (_, record) => (
+        <Space size="middle">
+          <div
+            className="primary-btn"
+            onClick={() => makePrimary(record.emailId)}
+          //   onClick={() => {
+          //     if (record.parimaryTag === 0) {
+          //       makePrimary(record.id);
+          //     } else {
+          //       toast.error("This email is already primary");
+          //     }
+          //   }
+          // }
+          >
+            <BsStopBtn />
           </div>
         </Space>
       ),
@@ -410,6 +434,29 @@ const Dashboard = ({ getDomains }) => {
     }
   };
   //-------------------End Delete API-----------------//
+
+
+  //-----------------Make Mail Primary------------------------//
+  const makePrimary = async (id) => {
+    try {
+      const response = await axios.patch(
+        `${process.env.REACT_APP_API}api/email/addprimary`,
+        {
+          id: id,
+          primaryTag: 1,
+        }
+      );
+      // window.location.reload();
+      console.log(response, "response data for primary tag");
+      toast.success("Mail made primary successfully");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+
+  //-----------------End Make Mail Primary------------------------//
   const options = { day: "2-digit", month: "short", year: "numeric" };
   return (
     <>
@@ -544,7 +591,6 @@ const Dashboard = ({ getDomains }) => {
           </div>
         </div>
       </div>
-
       {/* //subdomain modal  */}
       <Modal
         title="Add Subdomain"
