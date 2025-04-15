@@ -141,18 +141,18 @@ const Addmail = () => {
             <label>
               <p>Primary Mail</p>
               <select
-                value={emailadd.primaryTag.toString()} // convert boolean to string
+                value={Number(emailadd.primaryTag)} // convert boolean to string
                 onChange={(e) =>
                   setEmailAdd({
                     ...emailadd,
-                    primaryTag: e.target.value === "true", // convert string to boolean
+                    primaryTag: e.target.value , // convert string to boolean
                   })
                 }
                 className={error.primaryTag ? "error-border" : ""}
               >
                 <option value="">Select</option>
-                <option value="true">True</option>
-                <option value="false">False</option>
+                <option value="1">True</option>
+                <option value="0">False</option>
               </select>
             </label>
 
