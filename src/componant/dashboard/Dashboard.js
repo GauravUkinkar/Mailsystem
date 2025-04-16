@@ -312,19 +312,19 @@ const Dashboard = ({ getDomains }) => {
       render: (text, record) => (
         <div>
           <div>{text}</div>
-          {/* {record.parimaryTag === 1 && (
+          {record.parimaryTag === 1 && (
             <span style={{ 
               backgroundColor: "green", 
               color: "#fff", 
               fontSize: "12px", 
               padding: "2px 6px", 
-              borderRadius: "4px", 
-              marginTop: "4px", 
+              borderRadius: "5px", 
+              marginTop: "0px", 
               display: "inline-block" 
             }}>
               Primary
             </span>
-          )} */}
+          )}
         </div>
       ),
     },
@@ -367,32 +367,12 @@ const Dashboard = ({ getDomains }) => {
       ),
       width: "5%",
     },
-    {
-      title: "Tag",
-      key: "action",
-      render: (_, record) => (
-        <Space size="middle">
-          <div
-            className="primary-btn"
-            onClick={() => makePrimary(record.emailId)}
-          //   onClick={() => {
-          //     if (record.parimaryTag === 0) {
-          //       makePrimary(record.id);
-          //     } else {
-          //       toast.error("This email is already primary");
-          //     }
-          //   }
-          // }
-          >
-            <BsStopBtn />
-          </div>
-        </Space>
-      ),
-      width: "5%",
-    },
   ];
 
-  //end email data
+
+
+
+  
 
   const handleMasterData = async (id) => {
     try {
@@ -401,7 +381,7 @@ const Dashboard = ({ getDomains }) => {
       );
 
       setMasterData(response.data.data);
-      console.log(response.data.data, "master data");
+      // console.log(response.data.data, "master data");
     } catch (error) {
       console.log(error);
     }
@@ -436,27 +416,7 @@ const Dashboard = ({ getDomains }) => {
   //-------------------End Delete API-----------------//
 
 
-  //-----------------Make Mail Primary------------------------//
-  const makePrimary = async (id) => {
-    try {
-      const response = await axios.patch(
-        `${process.env.REACT_APP_API}api/email/addprimary`,
-        {
-          id: id,
-          primaryTag: 1,
-        }
-      );
-      // window.location.reload();
-      console.log(response, "response data for primary tag");
-      toast.success("Mail made primary successfully");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-
-
-  //-----------------End Make Mail Primary------------------------//
+ 
   const options = { day: "2-digit", month: "short", year: "numeric" };
   return (
     <>

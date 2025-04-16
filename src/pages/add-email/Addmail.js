@@ -22,9 +22,7 @@ const Addmail = () => {
     if (!values.password) {
       error.password = "Please Enter Email Password";
     }
-    if (!values.primaryTag) {
-      error.primaryTag = "Please Enter Primary Tag";
-    }
+  
     return error;
   };
   //-------------------------------//
@@ -37,7 +35,7 @@ const Addmail = () => {
     domainId: "",
     username: "",
     password: "",
-    primaryTag: false,
+    primaryTag: "Select",
   });
 
   const handleEmailByid = async () => {
@@ -55,7 +53,7 @@ const Addmail = () => {
         primaryTag: response.data.data[0].primaryTag,
       });
 
-      console.log(response.data.data[0], "response data");
+      // console.log(response.data.data[0], "response data");
     } catch (error) {
       console.log(error);
     }
@@ -141,24 +139,20 @@ const Addmail = () => {
             <label>
               <p>Primary Mail</p>
               <select
-                value={Number(emailadd.primaryTag)} // convert boolean to string
+                value={Number(emailadd.primaryTag)} 
                 onChange={(e) =>
                   setEmailAdd({
                     ...emailadd,
-                    primaryTag: e.target.value , // convert string to boolean
+                    primaryTag: e.target.value , 
                   })
                 }
                 className={error.primaryTag ? "error-border" : ""}
               >
                 <option value="">Select</option>
-                <option value="1">True</option>
-                <option value="0">False</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
               </select>
             </label>
-
-            {error.primaryTag && (
-              <span className="error">{error.primaryTag}</span>
-            )}
             {error.primaryTag && (
               <span className="error">{error.primaryTag}</span>
             )}
